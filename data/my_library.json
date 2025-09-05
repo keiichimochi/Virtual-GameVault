@@ -1,0 +1,50 @@
+{
+  "books": [
+    {
+      "title": "面倒なことはＣｈａｔＧＰＴにやらせよう (ＫＳ情報科学専門書)",
+      "authors": "カレーちゃん",
+      "acquiredTime": 1709596800000,
+      "readStatus": "READ",
+      "asin": "B0CVL7DSBQ",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B0CVL7DSBQ.01.L.jpg",
+      "source": "kindle_import",
+      "addedDate": 1757039577632
+    },
+    {
+      "title": "教えて！からあげ先生　はじめての生成ＡＩ",
+      "authors": "からあげ, いまがわ",
+      "acquiredTime": 1719792000000,
+      "readStatus": "READ",
+      "asin": "B0DSD56LM2",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B0DSD56LM2.01.L.jpg",
+      "source": "kindle_import",
+      "addedDate": 1757039577632
+    },
+    {
+      "title": "人気ブロガーからあげ先生のとにかく楽しいAI自作教室",
+      "authors": "からあげ",
+      "acquiredTime": 1607299200000,
+      "readStatus": "READ",
+      "asin": "B08R632HML",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B08R632HML.01.L.jpg",
+      "source": "kindle_import",
+      "addedDate": 1757039577632
+    },
+    {
+      "title": "ゼロから始める情報発信: No Output, No Value",
+      "authors": "からあげ",
+      "acquiredTime": 1627776000000,
+      "readStatus": "READ",
+      "asin": "B09875G3GL",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B09875G3GL.01.L.jpg",
+      "source": "kindle_import",
+      "addedDate": 1757039577632
+    }
+  ],
+  "metadata": {
+    "totalBooks": 4,
+    "manuallyAdded": 0,
+    "importedFromKindle": 4,
+    "lastImportDate": 1757039577632
+  }
+}

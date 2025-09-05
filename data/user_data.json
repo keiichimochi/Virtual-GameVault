@@ -1,0 +1,83 @@
+{
+  "exportDate": "2025-09-05T11:57:06.296Z",
+  "bookshelves": [
+    {
+      "id": "tech-books",
+      "name": "💻 技術書",
+      "description": "プログラミング・技術関連の本",
+      "books": [
+        "B08R632HML",
+        "B0DSD56LM2",
+        "B0CVL7DSBQ"
+      ],
+      "isPublic": true,
+      "color": "#3498db"
+    },
+    {
+      "id": "business-books",
+      "name": "📈 ビジネス書",
+      "description": "情報発信・ビジネス関連の本",
+      "books": [
+        "B09875G3GL"
+      ],
+      "isPublic": true,
+      "color": "#2ecc71"
+    }
+  ],
+  "notes": {
+    "B0CVL7DSBQ": {
+      "memo": "ChatGPTを使った業務効率化の具体的な方法が詰まった実践書。詳細は[こちら](https://karaage.hatenadiary.jp/entry/chatgpt_book_intro)をご覧ください",
+      "rating": 5
+    },
+    "B0DSD56LM2": {
+      "memo": "生成AIの入門書として分かりやすく書かれています。これから生成AIを学ぶ人に最適",
+      "rating": 5
+    },
+    "B092LY4HN9": {
+      "memo": "Jetson Nanoの入門書として詳しく解説されている改訂版。エッジAIの実装に役立ちます",
+      "rating": 4
+    },
+    "B08R632HML": {
+      "memo": "AI自作の楽しさを伝える素晴らしい入門書。初心者でも楽しく学べる構成になっています",
+      "rating": 4
+    },
+    "B09875G3GL": {
+      "memo": "情報発信の重要性とその方法について丁寧に解説。アウトプットの価値を再認識できる一冊",
+      "rating": 4
+    }
+  },
+  "settings": {
+    "defaultView": "hybrid",
+    "affiliateId": "",
+    "showHighlights": true,
+    "currentBookshelf": "all",
+    "theme": "light",
+    "booksPerPage": 50
+  },
+  "bookOrder": {
+    "all": [
+      "B0CVL7DSBQ",
+      "B0DSD56LM2",
+      "B092LY4HN9",
+      "B08R632HML",
+      "B09875G3GL"
+    ],
+    "ai-books": [
+      "B0CVL7DSBQ",
+      "B0DSD56LM2",
+      "B08R632HML"
+    ],
+    "tech-books": [
+      "B08R632HML"
+    ],
+    "business-books": [
+      "B09875G3GL"
+    ]
+  },
+  "stats": {
+    "totalBooks": 4,
+    "readBooks": 0,
+    "notesCount": 5
+  },
+  "version": "1.0"
+}
