@@ -31,7 +31,7 @@ for file in data/KindleHighlights/*.md; do
         
         if [ -n "$asin" ]; then
             # ASCIIファイル名を作成
-            ascii_filename="${asin}.md"
+            ascii_filename="${asin}.txt"
             
             # ASCIIディレクトリにファイルをコピー
             cp "$file" "$ASCII_DIR/$ascii_filename"
