@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-09-05T12:32:45.446Z",
+  "exportDate": "2025-09-05T16:54:38.332Z",
   "bookshelves": [
     {
       "id": "bookshelf_1757075203335",
@@ -10,7 +10,8 @@
         "B0CVL7DSBQ",
         "B0DSD56LM2",
         "B08R632HML",
-        "4065412382"
+        "4065412382",
+        "B092LY4HN9"
       ],
       "createdAt": "2025-09-05T12:26:43.335Z"
     }
@@ -30,7 +31,7 @@
     },
     "B092LY4HN9": {
       "memo": "Jetson Nanoの入門書として詳しく解説されている改訂版。エッジAIの実装に役立ちます",
-      "rating": 4
+      "rating": 5
     },
     "B08R632HML": {
       "memo": "AI自作の楽しさを伝える素晴らしい入門書。初心者でも楽しく学べる構成になっています",
@@ -47,7 +48,7 @@
   },
   "settings": {
     "defaultView": "hybrid",
-    "affiliateId": "vbookshelf-22",
+    "affiliateId": "",
     "showHighlights": true,
     "currentBookshelf": "all",
     "theme": "light",
@@ -55,6 +56,7 @@
   },
   "bookOrder": {
     "all": [
+      "4065412382",
       "B0CVL7DSBQ",
       "B0DSD56LM2",
       "B092LY4HN9",
@@ -80,8 +82,7 @@
     ]
   },
   "stats": {
-    "totalBooks": 37,
-    "readBooks": 0,
+    "totalBooks": 2449,
     "notesCount": 7
   },
   "version": "1.0"
