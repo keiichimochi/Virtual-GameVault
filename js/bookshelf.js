@@ -99,7 +99,7 @@ class VirtualBookshelf {
         });
         
         // Filters
-        document.getElementById('filter-status').addEventListener('change', () => this.applyFilters());
+        
         
         // Star rating filters
         ['star-0', 'star-1', 'star-2', 'star-3', 'star-4', 'star-5'].forEach(id => {
@@ -210,8 +210,6 @@ class VirtualBookshelf {
     }
 
     applyFilters() {
-        const statusFilter = document.getElementById('filter-status').value;
-        
         this.filteredBooks = this.books.filter(book => {
             // Bookshelf filter
             if (this.currentBookshelf && this.currentBookshelf !== 'all') {
@@ -219,11 +217,6 @@ class VirtualBookshelf {
                 if (bookshelf && bookshelf.books && !bookshelf.books.includes(book.asin)) {
                     return false;
                 }
-            }
-            
-            // Status filter
-            if (statusFilter !== 'all' && book.readStatus !== statusFilter) {
-                return false;
             }
             
             
@@ -298,7 +291,7 @@ class VirtualBookshelf {
             button.style.opacity = '1';
             
             // 並び順の種類に応じてテキストを変更
-            if (this.sortOrder === 'acquiredTime' || this.sortOrder === 'readStatus') {
+            if (this.sortOrder === 'acquiredTime') {
                 // 時系列・状態の場合
                 if (this.sortDirection === 'asc') {
                     button.textContent = '↑ 古い順';
@@ -399,7 +392,7 @@ class VirtualBookshelf {
                     <div class="book-author">${book.authors}</div>
                     ${userNote && userNote.memo ? `<div class="book-memo">📝 ${this.formatMemoForDisplay(userNote.memo, 400)}</div>` : ''}
                     ${this.displayStarRating(userNote?.rating)}
-                    ${book.readStatus === 'read' ? '<span class="status-badge status-read">読了</span>' : '<span class="status-badge status-unknown">未読</span>'}
+
                 </div>
             `;
         }
@@ -563,7 +556,7 @@ class VirtualBookshelf {
                             <button class="btn btn-small save-book-changes" data-asin="${book.asin}">💾 変更を保存</button>
                         </div>
                         <p>購入日: ${new Date(book.acquiredTime).toLocaleDateString('ja-JP')}</p>
-                        <p>読書状況: ${book.readStatus === 'READ' ? '読了' : '未読'}</p>
+
                         
                         <div class="book-actions">
                             <a class="amazon-link" href="${amazonUrl}" target="_blank" rel="noopener">
@@ -783,10 +776,9 @@ class VirtualBookshelf {
 
     updateStats() {
         const totalBooks = this.books.length;
-        const readBooks = this.books.filter(book => book.readStatus === 'READ').length;
         
         document.getElementById('total-books').textContent = totalBooks.toLocaleString();
-        document.getElementById('read-books').textContent = readBooks.toLocaleString();
+        document.getElementById('read-books').textContent = '-';
     }
 
 
@@ -836,7 +828,6 @@ class VirtualBookshelf {
             bookOrder: this.userData.bookOrder || {},
             stats: {
                 totalBooks: this.books.length,
-                readBooks: this.books.filter(book => book.readStatus === 'read').length,
                 notesCount: Object.keys(this.userData.notes).length
             },
             version: "1.0"
@@ -1126,7 +1117,7 @@ class VirtualBookshelf {
                 <div class="book-selection-info">
                     <div class="book-selection-title">${book.title} ${isExisting ? '(既にインポート済み)' : ''}</div>
                     <div class="book-selection-author">${book.authors}</div>
-                    <div class="book-selection-meta">${new Date(book.acquiredTime).toLocaleDateString('ja-JP')} • ${book.readStatus === 'READ' ? '読了' : '未読'}</div>
+                    <div class="book-selection-meta">${new Date(book.acquiredTime).toLocaleDateString('ja-JP')}</div>
                 </div>
             `;
             bookList.appendChild(bookItem);
@@ -1424,8 +1415,7 @@ class VirtualBookshelf {
         const manualAuthors = document.getElementById('manual-authors');
         if (manualAuthors) manualAuthors.value = '';
         
-        const manualStatus = document.getElementById('manual-status');
-        if (manualStatus) manualStatus.value = 'UNKNOWN';
+
         
         // 結果表示をリセット
         const resultsDiv = document.getElementById('add-book-results');
@@ -1486,7 +1476,7 @@ class VirtualBookshelf {
         const asin = document.getElementById('manual-asin').value.trim();
         const title = document.getElementById('manual-title').value.trim();
         const authors = document.getElementById('manual-authors').value.trim();
-        const readStatus = document.getElementById('manual-status').value;
+
 
         if (!asin) {
             alert('📝 ASINを入力してください');
@@ -1503,7 +1493,7 @@ class VirtualBookshelf {
                 asin: asin,
                 title: title,
                 authors: authors || '著者未設定',
-                readStatus: readStatus,
+                readStatus: 'UNKNOWN',
                 acquiredTime: Date.now()
             };
 

@@ -45,15 +45,6 @@
             <aside class="sidebar">
                 <div class="filter-section">
                     <h3>フィルター</h3>
-                    <div class="filter-group">
-                        <label>読書状況</label>
-                        <select id="filter-status">
-                            <option value="all">全て</option>
-                            <option value="READ">読了</option>
-                            <option value="UNKNOWN">未読</option>
-                        </select>
-                    </div>
-                    
                     
                     <div class="filter-group">
                         <label>星評価フィルター</label>
@@ -92,7 +83,7 @@
                             <option value="acquiredTime">購入日</option>
                             <option value="title">タイトル</option>
                             <option value="authors">著者</option>
-                            <option value="readStatus">読書状況</option>
+
                         </select>
                         <button id="sort-direction" class="btn btn-small">↓ 新しい順</button>
                     </div>
@@ -105,10 +96,7 @@
                             <span class="stat-value" id="total-books">-</span>
                             <span class="stat-label">総蔵書数</span>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-value" id="read-books">-</span>
-                            <span class="stat-label">読了数</span>
-                        </div>
+
                     </div>
                     
                     <div class="export-section">
@@ -251,13 +239,7 @@
                             <label for="manual-authors">著者</label>
                             <input type="text" id="manual-authors" placeholder="著者名" />
                         </div>
-                        <div class="form-group">
-                            <label for="manual-status">読書状況</label>
-                            <select id="manual-status">
-                                <option value="UNKNOWN">未読</option>
-                                <option value="READ">読了</option>
-                            </select>
-                        </div>
+
                         <button id="add-manually" class="btn btn-primary">手動追加</button>
                     </div>
                 </div>
