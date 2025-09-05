@@ -20,7 +20,7 @@
 - 🌐 **公開・共有**: 本棚ごとの公開設定とメモ表示
 - 💾 **データエクスポート**: 設定・星評価・メモの永続化
 - 📥 **蔵書管理**: Kindleインポート、手動追加、削除機能
-- 🔄 **ハイライトインデックス自動生成**: 新しいハイライトファイルの自動検出
+- 🔄 **ハイライトファイル管理**: スクリプトベースでのハイライトインデックス生成
 - 🔀 **並び替え機能**: ドラッグ&ドロップによる本の順序変更・保存
 
 ## 🚀 使い始めるには
@@ -79,7 +79,7 @@
 1. [Obsidian Kindle Plugin](https://github.com/hadynz/obsidian-kindle-plugin)をObsidianにインストール
 2. プラグインを使ってKindleハイライトをMarkdown形式でエクスポート
 3. エクスポートしたファイルを`data/KindleHighlights/`フォルダに配置
-4. 「🔄 ハイライトインデックス再生成」ボタンで自動インデックス作成
+4. ターミナルで`scripts/generate-highlights-index.sh`を実行してインデックス作成
 5. YAMLフロントマターにASIN情報が含まれていることを確認
 
 ## 📁 プロジェクト構造
@@ -97,7 +97,10 @@ virtual-bookshelf-template/
 │   ├── my_library.json    # メイン蔵書データ
 │   ├── user_data.json     # ユーザー設定・メモ・本棚設定
 │   ├── highlights-index.json # ハイライトファイルのASINマッピング
-│   └── KindleHighlights/  # ハイライトMarkdownファイル
+│   ├── KindleHighlights/  # ハイライトMarkdownファイル（元ファイル）
+│   └── HighlightsASCII/   # ASCIIファイル名のハイライト（Web表示用）
+├── scripts/
+│   └── generate-highlights-index.sh # ハイライトインデックス生成スクリプト
 ├── sample/
 │   └── sample_books.json  # サンプル蔵書データ（参考用）
 └── .gitignore             # Git除外設定
@@ -112,6 +115,9 @@ python -m http.server 8000
 npx serve .
 # または
 php -S localhost:8000
+
+# ハイライトインデックス生成（ハイライト機能を使用する場合）
+./scripts/generate-highlights-index.sh
 ```
 
 ブラウザで `http://localhost:8000` を開く

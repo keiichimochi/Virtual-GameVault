@@ -144,9 +144,6 @@ class VirtualBookshelf {
             this.showAddBookModal();
         });
 
-        document.getElementById('regenerate-highlights-index').addEventListener('click', () => {
-            this.regenerateHighlightsIndex();
-        });
 
         // Export library button
         document.getElementById('export-library').addEventListener('click', () => {
@@ -1103,24 +1100,6 @@ class VirtualBookshelf {
         }
     }
 
-    async regenerateHighlightsIndex() {
-        try {
-            console.log('🔄 ハイライトインデックス再生成開始...');
-            
-            // HighlightsManagerの機能を使用
-            if (!this.highlightsManager) {
-                this.highlightsManager = new HighlightsManager(this);
-            }
-            
-            const result = await this.highlightsManager.generateHighlightsIndex();
-            
-            alert(`✅ インデックス生成完了！\n${result.message}\n\n更新されたインデックスファイルをダウンロードしました。\ndata/highlights-index.jsonを手動で置き換えてください。`);
-            
-        } catch (error) {
-            console.error('❌ インデックス再生成エラー:', error);
-            alert('❌ インデックス再生成に失敗しました: ' + error.message);
-        }
-    }
 
     showBookSelectionForImport(books, source) {
         this.pendingImportBooks = books;
