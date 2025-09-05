@@ -17,9 +17,8 @@ class HighlightsManager {
             const fileName = await this.getHighlightFileByASIN(book.asin);
             
             if (fileName) {
-                // 日本語ファイル名を適切にURLエンコード
-                const encodedFileName = encodeURIComponent(fileName);
-                const response = await fetch(`data/KindleHighlights/${encodedFileName}`);
+                // ASCIIファイル名フォルダから読み込み（GitHub Pages対応）
+                const response = await fetch(`data/HighlightsASCII/${fileName}`);
                 if (response.ok) {
                     const markdownText = await response.text();
                     const highlights = this.parseMarkdownHighlights(markdownText);
