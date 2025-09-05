@@ -369,7 +369,7 @@ class VirtualBookshelf {
                         `<img class="book-cover lazy" data-src="${book.productImage}" alt="${book.title}">` :
                         `<div class="book-cover-placeholder">${book.title}</div>`
                     }
-                    ${book.readStatus === 'READ' ? '<span class="status-badge status-read">読了</span>' : '<span class="status-badge status-unknown">未読</span>'}
+
                 </div>
                 <div class="book-info">
                     <div class="book-title">${book.title}</div>
