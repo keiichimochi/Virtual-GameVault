@@ -912,7 +912,8 @@ class VirtualBookshelf {
         this.userData.bookshelves.forEach(bookshelf => {
             const bookCount = bookshelf.books ? bookshelf.books.length : 0;
             html += `
-                <div class="bookshelf-item" data-id="${bookshelf.id}">
+                <div class="bookshelf-item" data-id="${bookshelf.id}" draggable="true">
+                    <div class="bookshelf-drag-handle">⋮⋮</div>
                     <div class="bookshelf-info">
                         <h4>${bookshelf.emoji || '📚'} ${bookshelf.name}</h4>
                         <p>${bookshelf.description || ''}</p>
@@ -937,8 +938,8 @@ class VirtualBookshelf {
             }
         });
 
-        // Add bookshelf creation
-        document.getElementById('add-bookshelf').addEventListener('click', () => this.addBookshelf());
+        // Add drag and drop functionality for bookshelf reordering
+        this.setupBookshelfDragAndDrop(container);
     }
 
     addBookshelf() {
@@ -1656,6 +1657,84 @@ class VirtualBookshelf {
             loading.style.display = 'none';
         }
     }
+
+    setupBookshelfDragAndDrop(container) {
+        let draggedBookshelf = null;
+
+        container.addEventListener('dragstart', (e) => {
+            if (e.target.classList.contains('bookshelf-item')) {
+                draggedBookshelf = e.target;
+                e.target.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', e.target.dataset.id);
+            }
+        });
+
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            
+            const target = e.target.closest('.bookshelf-item');
+            if (target && target !== draggedBookshelf) {
+                target.style.borderTop = '2px solid #3498db';
+            }
+        });
+
+        container.addEventListener('dragleave', (e) => {
+            const target = e.target.closest('.bookshelf-item');
+            if (target) {
+                target.style.borderTop = '';
+            }
+        });
+
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+            
+            const target = e.target.closest('.bookshelf-item');
+            if (target && target !== draggedBookshelf) {
+                const draggedId = draggedBookshelf.dataset.id;
+                const targetId = target.dataset.id;
+                this.reorderBookshelves(draggedId, targetId);
+            }
+
+            // Clear all visual feedback
+            container.querySelectorAll('.bookshelf-item').forEach(item => {
+                item.style.borderTop = '';
+            });
+        });
+
+        container.addEventListener('dragend', (e) => {
+            if (e.target.classList.contains('bookshelf-item')) {
+                e.target.classList.remove('dragging');
+                draggedBookshelf = null;
+            }
+            
+            // Clear all visual feedback
+            container.querySelectorAll('.bookshelf-item').forEach(item => {
+                item.style.borderTop = '';
+            });
+        });
+    }
+
+    reorderBookshelves(draggedId, targetId) {
+        const draggedIndex = this.userData.bookshelves.findIndex(b => b.id === draggedId);
+        const targetIndex = this.userData.bookshelves.findIndex(b => b.id === targetId);
+
+        if (draggedIndex !== -1 && targetIndex !== -1) {
+            // Remove the dragged bookshelf from its current position
+            const draggedBookshelf = this.userData.bookshelves.splice(draggedIndex, 1)[0];
+            
+            // Insert it at the new position
+            this.userData.bookshelves.splice(targetIndex, 0, draggedBookshelf);
+            
+            // Save the changes
+            this.saveUserData();
+            this.updateBookshelfSelector();
+            this.renderBookshelfList();
+            
+            console.log(`📚 本棚「${draggedBookshelf.name}」を移動しました`);
+        }
+    }
 }
 
 // Lazy Loading for Images
@@ -1687,6 +1766,11 @@ class LazyLoader {
 document.addEventListener('DOMContentLoaded', () => {
     window.bookshelf = new VirtualBookshelf();
     window.lazyLoader = new LazyLoader();
+    
+    // Set up bookshelf management event listeners
+    document.getElementById('add-bookshelf').addEventListener('click', () => {
+        window.bookshelf.addBookshelf();
+    });
     
     // Set up mutation observer to handle dynamically added images
     const mutationObserver = new MutationObserver(() => {

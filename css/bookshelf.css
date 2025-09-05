@@ -1409,3 +1409,65 @@ body {
 .rating-reset:hover {
     background-color: #7f8c8d;
 }
+
+/* Bookshelf Management - Drag and Drop Styles */
+.bookshelf-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    background-color: #f9f9f9;
+    cursor: grab;
+    transition: all 0.2s ease;
+}
+
+.bookshelf-item:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+}
+
+.bookshelf-item.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.bookshelf-drag-handle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-right: 1rem;
+    cursor: grab;
+    user-select: none;
+    padding: 0.5rem;
+}
+
+.bookshelf-drag-handle:hover {
+    color: #333;
+}
+
+.bookshelf-info {
+    flex: 1;
+}
+
+.bookshelf-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.bookshelf-item h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+}
+
+.bookshelf-item p {
+    margin: 0 0 0.25rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.book-count {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: bold;
+}
