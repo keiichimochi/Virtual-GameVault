@@ -778,7 +778,6 @@ class VirtualBookshelf {
         const totalBooks = this.books.length;
         
         document.getElementById('total-books').textContent = totalBooks.toLocaleString();
-        document.getElementById('read-books').textContent = '-';
     }
 
 
