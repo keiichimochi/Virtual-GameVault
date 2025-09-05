@@ -41,13 +41,18 @@ class HighlightsManager {
 
     async getAllHighlightFiles() {
         try {
-            const response = await fetch('data/highlights-index.json');
+            // GitHub Actionsで生成されたファイル一覧を取得
+            const response = await fetch('data/highlights-files.json');
             if (response.ok) {
-                const index = await response.json();
-                return Object.values(index); // Return all filenames
+                const fileList = await response.json();
+                console.log(`📁 GitHub Actionsで生成されたファイル一覧: ${fileList.length}件`);
+                return fileList;
+            } else {
+                console.warn('⚠️ highlights-files.json が見つかりません。GitHub Actionsが実行されていない可能性があります。');
+                return [];
             }
-            return [];
         } catch (error) {
+            console.error('❌ ファイル一覧取得エラー:', error);
             return [];
         }
     }
@@ -255,45 +260,104 @@ class HighlightsManager {
 
     async generateHighlightsIndex() {
         try {
-            const newIndex = {};
+            console.log('🔄 ハイライトインデックス生成開始...');
             
-            // data/KindleHighlights/ フォルダ内の .md ファイルを検索する
-            // ブラウザ環境では直接ファイルリストを取得できないため、
-            // 一般的なファイル名パターンを試行してASINを抽出する方法を使用
+            // 既存のインデックスを読み込み
+            let existingIndex = {};
+            try {
+                const response = await fetch('data/highlights-index.json');
+                if (response.ok) {
+                    existingIndex = await response.json();
+                    console.log('📖 既存インデックス読み込み:', Object.keys(existingIndex).length + '件');
+                }
+            } catch (error) {
+                console.log('📝 既存インデックスなし、新規作成します');
+            }
             
-            const possibleFiles = await this.scanHighlightFiles();
+            // KindleHighlightsフォルダ内のファイルを取得
+            const highlightFiles = await this.getAllHighlightFiles();
+            console.log('📁 発見されたハイライトファイル数:', highlightFiles.length);
             
-            for (const filename of possibleFiles) {
+            if (highlightFiles.length === 0) {
+                return {
+                    existingCount: Object.keys(existingIndex).length,
+                    newSuggestions: 0,
+                    completeIndex: existingIndex,
+                    message: 'KindleHighlightsフォルダにハイライトファイルが見つかりません。ファイルを配置してから再実行してください。'
+                };
+            }
+            
+            const existingASINs = new Set(Object.keys(existingIndex));
+            const newIndex = { ...existingIndex };
+            let newEntriesCount = 0;
+            let processedCount = 0;
+            let errorCount = 0;
+            
+            // 各ハイライトファイルからASINを抽出
+            for (const fileName of highlightFiles) {
                 try {
-                    const encodedFileName = encodeURIComponent(filename);
+                    processedCount++;
+                    console.log(`📖 処理中 (${processedCount}/${highlightFiles.length}):`, fileName);
+                    
+                    // ファイル内容を読み込み
+                    const encodedFileName = encodeURIComponent(fileName);
                     const response = await fetch(`data/KindleHighlights/${encodedFileName}`);
                     
-                    if (response.ok) {
-                        const content = await response.text();
-                        const asin = this.extractASINFromMarkdown(content);
-                        
-                        if (asin) {
-                            newIndex[asin] = filename;
-                        }
+                    if (!response.ok) {
+                        console.warn('⚠️ ファイル読み込み失敗:', fileName, response.status);
+                        errorCount++;
+                        continue;
                     }
+                    
+                    const content = await response.text();
+                    const asin = this.extractASINFromMarkdown(content);
+                    
+                    if (asin) {
+                        if (!existingASINs.has(asin)) {
+                            newIndex[asin] = fileName;
+                            newEntriesCount++;
+                            console.log('✅ 新規エントリ追加:', asin, '→', fileName);
+                        } else {
+                            console.log('💡 既存エントリ確認:', asin, '→', fileName);
+                        }
+                    } else {
+                        console.warn('⚠️ ASINが見つかりません:', fileName);
+                        errorCount++;
+                    }
+                    
                 } catch (error) {
-                    // ファイル読み込みエラーは無視
+                    console.error('❌ ファイル処理エラー:', fileName, error.message);
+                    errorCount++;
                 }
             }
             
-            // 新しいインデックスをダウンロード
-            this.downloadJSON(newIndex, 'highlights-index.json');
+            console.log(`📊 処理完了: 既存${Object.keys(existingIndex).length}件 + 新規${newEntriesCount}件 (エラー${errorCount}件)`);
+            
+            // 新しいエントリがある場合のみダウンロード
+            if (newEntriesCount > 0) {
+                this.downloadJSON(newIndex, 'highlights-index.json');
+                console.log('💾 更新されたインデックスをダウンロードしました');
+            }
             
             return {
-                scannedFiles: possibleFiles.length,
-                validFiles: Object.keys(newIndex).length,
-                newIndex: newIndex,
-                message: `${possibleFiles.length}個のファイルをスキャンし、${Object.keys(newIndex).length}個の有効なハイライトファイルを発見しました。`
+                existingCount: Object.keys(existingIndex).length,
+                newSuggestions: newEntriesCount,
+                completeIndex: newIndex,
+                totalProcessed: processedCount,
+                errors: errorCount,
+                message: newEntriesCount > 0 
+                    ? `${newEntriesCount}件の新規エントリを発見し、インデックスを更新しました。(処理済み${processedCount}件、エラー${errorCount}件)`
+                    : `新規エントリなし。処理済み${processedCount}件中${errorCount}件でエラーが発生しました。`
             };
             
         } catch (error) {
-            console.error('インデックス生成エラー:', error);
-            throw error;
+            console.error('❌ インデックス生成エラー:', error);
+            return {
+                existingCount: 0,
+                newSuggestions: 0,
+                completeIndex: {},
+                message: 'インデックス生成中にエラーが発生しました: ' + error.message
+            };
         }
     }
     
