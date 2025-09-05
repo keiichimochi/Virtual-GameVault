@@ -1,30 +1,25 @@
 {
-  "exportDate": "2025-09-05T11:57:06.296Z",
+  "exportDate": "2025-09-05T12:32:45.446Z",
   "bookshelves": [
     {
-      "id": "tech-books",
-      "name": "💻 技術書",
-      "description": "プログラミング・技術関連の本",
+      "id": "bookshelf_1757075203335",
+      "name": "からあげの著書",
+      "emoji": "📚🍗",
+      "description": "からあげの書いた書籍",
       "books": [
-        "B08R632HML",
+        "B0CVL7DSBQ",
         "B0DSD56LM2",
-        "B0CVL7DSBQ"
+        "B08R632HML",
+        "4065412382"
       ],
-      "isPublic": true,
-      "color": "#3498db"
-    },
-    {
-      "id": "business-books",
-      "name": "📈 ビジネス書",
-      "description": "情報発信・ビジネス関連の本",
-      "books": [
-        "B09875G3GL"
-      ],
-      "isPublic": true,
-      "color": "#2ecc71"
+      "createdAt": "2025-09-05T12:26:43.335Z"
     }
   ],
   "notes": {
+    "4065412382": {
+      "memo": "新発売！\n[詳細はこちら](https://karaage.hatenadiary.jp/entry/python-mcp-book)",
+      "rating": 5
+    },
     "B0CVL7DSBQ": {
       "memo": "ChatGPTを使った業務効率化の具体的な方法が詰まった実践書。詳細は[こちら](https://karaage.hatenadiary.jp/entry/chatgpt_book_intro)をご覧ください",
       "rating": 5
@@ -43,6 +38,10 @@
     },
     "B09875G3GL": {
       "memo": "情報発信の重要性とその方法について丁寧に解説。アウトプットの価値を再認識できる一冊",
+      "rating": 4
+    },
+    "B0FKSG95HV": {
+      "memo": "",
       "rating": 4
     }
   },
@@ -72,12 +71,18 @@
     ],
     "business-books": [
       "B09875G3GL"
+    ],
+    "bookshelf_1757075203335": [
+      "4065412382",
+      "B0DSD56LM2",
+      "B0CVL7DSBQ",
+      "B08R632HML"
     ]
   },
   "stats": {
-    "totalBooks": 4,
+    "totalBooks": 37,
     "readBooks": 0,
-    "notesCount": 5
+    "notesCount": 7
   },
   "version": "1.0"
 }
