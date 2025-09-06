@@ -31,14 +31,33 @@ class BookManager {
             }
         }
         
-        // LocalStorageにない場合はmy_library.jsonを確認
+        // LocalStorageにない場合はlibrary.jsonを確認
         try {
-            const response = await fetch('data/my_library.json');
-            this.library = await response.json();
-            console.log('my_library.jsonから蔵書データを読み込み:', this.library.books.length + '冊');
+            const response = await fetch('data/library.json');
+            const libraryData = await response.json();
+            // 新しいデータ構造から古い形式に変換
+            this.library = {
+                books: Object.values(libraryData.books).map(book => ({
+                    title: book.title,
+                    authors: book.authors,
+                    acquiredTime: book.acquiredTime,
+                    readStatus: book.readStatus,
+                    asin: Object.keys(libraryData.books).find(asin => libraryData.books[asin] === book),
+                    productImage: book.productImage,
+                    source: book.source,
+                    addedDate: book.addedDate
+                })),
+                metadata: {
+                    totalBooks: libraryData.stats.totalBooks,
+                    manuallyAdded: 0,
+                    importedFromKindle: libraryData.stats.totalBooks,
+                    lastImportDate: libraryData.exportDate
+                }
+            };
+            console.log('library.jsonから蔵書データを読み込み:', this.library.books.length + '冊');
         } catch (error) {
             // ファイルが存在しない場合は空の蔵書で初期化（自動インポートしない）
-            console.log('my_library.json not found, initializing empty library');
+            console.log('library.json not found, initializing empty library');
             this.library = {
                 books: [],
                 metadata: {
@@ -416,7 +435,7 @@ class BookManager {
         
         const link = document.createElement('a');
         link.href = URL.createObjectURL(dataBlob);
-        link.download = 'my_library.json';
+        link.download = 'library.json';
         link.click();
         
         URL.revokeObjectURL(link.href);

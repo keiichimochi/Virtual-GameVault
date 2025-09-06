@@ -71,18 +71,28 @@ class HighlightsManager {
     parseMarkdownHighlights(markdownText) {
         const highlights = [];
         
-        // Find the Highlights section
-        const highlightsSectionMatch = markdownText.match(/## Highlights\s*\n([\s\S]*?)(?=\n---|\n##|$)/);
+        // Find the Highlights section - capture everything after ## Highlights
+        const highlightsSectionMatch = markdownText.match(/## Highlights\s*\n([\s\S]*)/);
         
         if (highlightsSectionMatch) {
             const highlightsContent = highlightsSectionMatch[1];
             
-            // Look for highlight patterns: text — location: [number]
-            const highlightMatches = highlightsContent.match(/^(.+?)\s*—\s*location:\s*\[(\d+)\]/gm);
+            // Split by --- separators and find highlight patterns
+            const sections = highlightsContent.split(/\n---\n/);
             
-            if (highlightMatches) {
-                for (const match of highlightMatches) {
-                    const locationMatch = match.match(/^(.+?)\s*—\s*location:\s*\[(\d+)\]/);
+            const highlightMatches = [];
+            sections.forEach((section) => {
+                const trimmed = section.trim();
+                if (trimmed && trimmed.includes('— location:')) {
+                    highlightMatches.push(trimmed);
+                }
+            });
+            
+            if (highlightMatches && highlightMatches.length > 0) {
+                for (let i = 0; i < highlightMatches.length; i++) {
+                    const match = highlightMatches[i];
+                    
+                    const locationMatch = match.match(/(.+?)\s*—\s*location:\s*\[(\d+)\]/s);
                     if (locationMatch) {
                         const text = locationMatch[1].trim();
                         const location = locationMatch[2];

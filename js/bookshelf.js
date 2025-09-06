@@ -62,11 +62,45 @@ class VirtualBookshelf {
         } else {
             // Fallback to file if localStorage is empty
             try {
-                const userResponse = await fetch('data/user_data.json');
-                this.userData = await userResponse.json();
+                const libraryResponse = await fetch('data/library.json');
+                if (!libraryResponse.ok) {
+                    throw new Error('library.json not found');
+                }
+                
+                const text = await libraryResponse.text();
+                if (!text.trim()) {
+                    // 空ファイルの場合はデフォルトデータを使用
+                    console.log('Empty library.json detected, using defaults');
+                    this.userData = this.createDefaultUserData();
+                } else {
+                    const libraryData = JSON.parse(text);
+                    // 新しい統合データから必要な部分を抽出
+                    this.userData = {
+                        exportDate: libraryData.exportDate || new Date().toISOString(),
+                        bookshelves: libraryData.bookshelves || [],
+                        notes: {},
+                        settings: libraryData.settings || this.getDefaultSettings(),
+                        bookOrder: libraryData.bookOrder || {},
+                        stats: libraryData.stats || { totalBooks: 0, notesCount: 0 },
+                        version: libraryData.version || '2.0'
+                    };
+                    // 書籍データからnotesを再構築
+                    if (libraryData.books) {
+                        Object.keys(libraryData.books).forEach(asin => {
+                            const book = libraryData.books[asin];
+                            if (book.memo || book.rating) {
+                                this.userData.notes[asin] = {
+                                    memo: book.memo || '',
+                                    rating: book.rating || 0
+                                };
+                            }
+                        });
+                    }
+                }
             } catch (error) {
-                console.error('Failed to load user_data.json:', error);
-                throw new Error('ユーザーデータファイルの読み込みに失敗しました');
+                console.error('Failed to load library.json:', error);
+                console.log('Using default user data');
+                this.userData = this.createDefaultUserData();
             }
         }
         
@@ -134,8 +168,8 @@ class VirtualBookshelf {
         });
 
         // Export button
-        document.getElementById('export-data').addEventListener('click', () => {
-            this.exportUserData();
+        document.getElementById('export-unified').addEventListener('click', () => {
+            this.exportUnifiedData();
         });
 
         // Bookshelf management
@@ -156,10 +190,7 @@ class VirtualBookshelf {
         });
 
 
-        // Export library button
-        document.getElementById('export-library').addEventListener('click', () => {
-            this.exportLibrary();
-        });
+        // 統合エクスポートボタンは上で定義済み（export-library削除）
 
         // Import from file button
         document.getElementById('import-from-file').addEventListener('click', () => {
@@ -889,63 +920,83 @@ class VirtualBookshelf {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    createDefaultUserData() {
+        return {
+            exportDate: new Date().toISOString(),
+            bookshelves: [],
+            notes: {},
+            settings: this.getDefaultSettings(),
+            bookOrder: {},
+            stats: { totalBooks: 0, notesCount: 0 },
+            version: '2.0'
+        };
+    }
+
+    getDefaultSettings() {
+        return {
+            defaultView: 'covers',
+            showHighlights: true,
+            currentBookshelf: 'all',
+            theme: 'light',
+            booksPerPage: 50,
+            showImagesInOverview: true
+        };
+    }
+
     saveUserData() {
         localStorage.setItem('virtualBookshelf_userData', JSON.stringify(this.userData));
     }
 
-    exportUserData() {
-        // Create settings without affiliateId (which comes from config file)
-        const { affiliateId, ...settingsWithoutAffiliateId } = this.userData.settings;
-        
-        const exportData = {
-            exportDate: new Date().toISOString(),
-            bookshelves: this.userData.bookshelves,
-            notes: this.userData.notes,
-            settings: settingsWithoutAffiliateId,
-            bookOrder: this.userData.bookOrder || {},
-            stats: {
-                totalBooks: this.books.length,
-                notesCount: Object.keys(this.userData.notes).length
-            },
-            version: '1.0'
-        };
-        
-        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'user_data.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        
-        alert('📁 設定と並び順をエクスポートしました！\n\nダウンロードしたファイルを data/user_data.json として保存してGitHubにpushすると、設定が永続化されます。');
-    }
+    // exportUserData function removed - replaced with exportUnifiedData
 
     autoSaveUserDataFile() {
-        // Create a complete backup of user data including book orders
+        // BookManagerから書籍データを取得
+        const bookManager = window.bookManager;
+        const books = {};
+        
+        // 書籍データを統合形式に変換
+        if (bookManager && bookManager.library && bookManager.library.books) {
+            bookManager.library.books.forEach(book => {
+                const asin = book.asin;
+                books[asin] = {
+                    title: book.title,
+                    authors: book.authors,
+                    acquiredTime: book.acquiredTime,
+                    readStatus: book.readStatus,
+                    productImage: book.productImage,
+                    source: book.source,
+                    addedDate: book.addedDate,
+                    memo: this.userData.notes[asin]?.memo || '',
+                    rating: this.userData.notes[asin]?.rating || 0
+                };
+            });
+        }
+
         const backupData = {
+            exportDate: new Date().toISOString(),
+            books: books,
             bookshelves: this.userData.bookshelves,
-            notes: this.userData.notes,
             settings: this.userData.settings,
             bookOrder: this.userData.bookOrder,
-            backupTimestamp: Date.now(),
-            version: '1.0'
+            stats: {
+                totalBooks: Object.keys(books).length,
+                notesCount: Object.keys(this.userData.notes).length
+            },
+            version: '2.0'
         };
         
         const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'user_data.json';
+        a.download = 'library.json';
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         
-        console.log('📁 user_data.jsonファイルを自動生成しました');
+        console.log('📁 library.jsonファイルを自動生成しました');
     }
 
     updateBookshelfSelector() {
@@ -1643,21 +1694,77 @@ class VirtualBookshelf {
     /**
      * 蔵書データをエクスポート
      */
-    exportLibrary() {
-        this.bookManager.exportLibraryData();
-        alert('📦 蔵書データをエクスポートしました！\n\nダウンロードしたファイルを data/my_library.json として保存してGitHubにpushすると、蔵書データが永続化されます。');
+    exportUnifiedData() {
+        console.log('📦 エクスポート開始...');
+        
+        // 既存のlibrary.jsonを読み込み、現在のデータと統合
+        const exportData = {
+            exportDate: new Date().toISOString(),
+            books: {}, // 後で設定
+            bookshelves: this.userData.bookshelves || [],
+            settings: (() => {
+                const { affiliateId, ...settingsWithoutAffiliateId } = this.userData.settings;
+                return settingsWithoutAffiliateId;
+            })(),
+            bookOrder: this.userData.bookOrder || {},
+            stats: {
+                totalBooks: 0,
+                notesCount: Object.keys(this.userData.notes || {}).length
+            },
+            version: '2.0'
+        };
+        
+        // 現在表示されている書籍データをbooks形式に変換
+        const books = {};
+        if (this.books && this.books.length > 0) {
+            console.log(`📚 ${this.books.length}冊の書籍データを処理中...`);
+            this.books.forEach(book => {
+                const asin = book.asin;
+                if (asin) {
+                    books[asin] = {
+                        title: book.title || '',
+                        authors: book.authors || '',
+                        acquiredTime: book.acquiredTime || Date.now(),
+                        readStatus: book.readStatus || 'UNREAD',
+                        productImage: book.productImage || '',
+                        source: book.source || 'unknown',
+                        addedDate: book.addedDate || Date.now(),
+                        memo: this.userData.notes?.[asin]?.memo || '',
+                        rating: this.userData.notes?.[asin]?.rating || 0
+                    };
+                }
+            });
+        }
+        
+        exportData.books = books;
+        exportData.stats.totalBooks = Object.keys(books).length;
+        
+        console.log(`📊 エクスポートデータ: ${exportData.stats.totalBooks}冊, ${exportData.stats.notesCount}メモ`);
+        
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'library.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        alert('📦 library.json をエクスポートしました！');
     }
 
     /**
      * 蔵書を全てクリア
      */
     async clearLibrary() {
-        const confirmMessage = `🗑️ 蔵書を全てクリアしますか？
+        const confirmMessage = `🗑️ 全データを完全にクリアしますか？
 
 この操作により以下のデータが削除されます：
 • 全ての書籍データ
-• 評価・メモは保持されます
-• 本棚設定は保持されます
+• 全ての本棚設定
+• 全ての評価・メモ
+• 全ての並び順設定
 
 この操作は元に戻せません。`;
         
@@ -1671,17 +1778,22 @@ class VirtualBookshelf {
             // BookManagerで蔵書をクリア
             await this.bookManager.clearAllBooks();
             
-            // userDataが存在する場合のみ処理
-            if (this.userData && this.userData.bookshelves) {
-                // ユーザーデータの本棚から書籍を削除
-                this.userData.bookshelves.forEach(shelf => {
-                    shelf.books = [];
-                });
+            // 全てのuserDataを完全にクリア
+            if (this.userData) {
+                // 本棚データを完全クリア
+                this.userData.bookshelves = [];
                 
-                // 並び順データもクリア
-                if (this.userData.bookOrder) {
-                    this.userData.bookOrder = {};
-                }
+                // 評価・メモを完全クリア  
+                this.userData.notes = {};
+                
+                // 並び順データを完全クリア
+                this.userData.bookOrder = {};
+                
+                // 統計データもリセット
+                this.userData.stats = {
+                    totalBooks: 0,
+                    notesCount: 0
+                };
             }
             
             // 本のリストを更新
@@ -1693,7 +1805,7 @@ class VirtualBookshelf {
             this.updateDisplay();
             this.updateStats();
             
-            alert('✅ 蔵書を全てクリアしました');
+            alert('✅ 全データを完全にクリアしました');
         } catch (error) {
             console.error('蔵書クリア中にエラーが発生しました:', error);
             alert('❌ 蔵書のクリアに失敗しました: ' + error.message);
