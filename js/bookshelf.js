@@ -43,6 +43,16 @@ class VirtualBookshelf {
         // Get books from BookManager instead of direct kindle.json
         this.books = this.bookManager.getAllBooks();
         
+        // Load config data
+        let config = {};
+        try {
+            const configResponse = await fetch('data/config.json');
+            config = await configResponse.json();
+        } catch (error) {
+            console.error('Failed to load config.json:', error);
+            throw new Error('設定ファイルの読み込みに失敗しました');
+        }
+        
         // Check localStorage first for user data
         const savedUserData = localStorage.getItem('virtualBookshelf_userData');
         
@@ -55,27 +65,13 @@ class VirtualBookshelf {
                 const userResponse = await fetch('data/user_data.json');
                 this.userData = await userResponse.json();
             } catch (error) {
-                // Initialize default user data if neither exists
-                this.userData = {
-                    notes: {},
-                    bookshelves: [
-                        {
-                            id: "my-books",
-                            name: "✍️ 自分の著書",
-                            description: "からあげが執筆した本",
-                            books: [],
-                            color: "#e74c3c",
-                            featured: true
-                        }
-                    ],
-                    settings: {
-                        defaultView: 'covers',
-                        affiliateId: 'vbookshelf-22',
-                        showHighlights: true
-                    }
-                };
+                console.error('Failed to load user_data.json:', error);
+                throw new Error('ユーザーデータファイルの読み込みに失敗しました');
             }
         }
+        
+        // Merge config into userData settings
+        this.userData.settings = { ...this.userData.settings, ...config };
         
         this.currentView = this.userData.settings.defaultView || 'covers';
         
