@@ -2,6 +2,8 @@
 
 あなたの個人読書ライブラリを美しく展示するWebアプリケーションテンプレートです。
 
+[Virtual Bookshelf](https://karaage0703.github.io/karaage-virtual-bookshelf/)
+
 ## 🎯 概要
 
 このテンプレートは、iPadのKindleアプリや他の電子書籍リーダーで読書をしている方向けの、個人蔵書管理・展示システムです。読んだ本を見つけやすくし、5星評価システムで本を評価・管理できます。
