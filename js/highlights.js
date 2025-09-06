@@ -113,7 +113,11 @@ class HighlightsManager {
 
     renderHighlights(highlights, container) {
         if (!highlights || highlights.length === 0) {
-            container.innerHTML = '<p class="no-highlights">📖 この本にはハイライトがありません</p>';
+            container.textContent = '';
+            const noHighlights = document.createElement('p');
+            noHighlights.className = 'no-highlights';
+            noHighlights.textContent = '📖 この本にはハイライトがありません';
+            container.appendChild(noHighlights);
             return;
         }
 
@@ -155,7 +159,12 @@ class HighlightsManager {
             highlightsHTML += '</div>';
         }
 
-        container.innerHTML = highlightsHTML;
+        container.textContent = '';
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = highlightsHTML;
+        while (tempDiv.firstChild) {
+            container.appendChild(tempDiv.firstChild);
+        }
 
         // Setup toggle functionality
         const toggleBtn = container.querySelector('.toggle-highlights');

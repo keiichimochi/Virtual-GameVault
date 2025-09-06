@@ -24,10 +24,10 @@ class BookManager {
         if (savedLibrary) {
             try {
                 this.library = JSON.parse(savedLibrary);
-                console.log('LocalStorageから蔵書データを復元:', this.library.books.length + '冊');
+                // Data restored from localStorage
                 return;
             } catch (error) {
-                console.error('LocalStorage読み込みエラー:', error);
+                // LocalStorage loading error (fallback to file)
             }
         }
         
@@ -54,10 +54,10 @@ class BookManager {
                     lastImportDate: libraryData.exportDate
                 }
             };
-            console.log('library.jsonから蔵書データを読み込み:', this.library.books.length + '冊');
+            // Data loaded from library.json
         } catch (error) {
             // ファイルが存在しない場合は空の蔵書で初期化（自動インポートしない）
-            console.log('library.json not found, initializing empty library');
+            // Initializing empty library (no library.json found)
             this.library = {
                 books: [],
                 metadata: {
@@ -92,9 +92,9 @@ class BookManager {
             };
             
             await this.saveLibrary();
-            console.log(`初期化完了: ${kindleBooks.length}冊をインポート`);
+            // Kindle import completed
         } catch (error) {
-            console.error('kindle.json読み込みエラー:', error);
+            // Kindle.json loading error
         }
     }
 

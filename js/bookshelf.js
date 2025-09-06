@@ -1,4 +1,19 @@
 // Virtual Bookshelf - Main JavaScript
+// Debug flag system
+const DEBUG = false; // Set to false for production
+
+function debugLog(...args) {
+    if (DEBUG) {
+        console.log('[BookShelf Debug]', ...args);
+    }
+}
+
+function debugError(...args) {
+    if (DEBUG) {
+        console.error('[BookShelf Error]', ...args);
+    }
+}
+
 class VirtualBookshelf {
     constructor() {
         this.books = [];
@@ -374,9 +389,15 @@ class VirtualBookshelf {
         }
     }
 
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
     updateDisplay() {
         const bookshelf = document.getElementById('bookshelf');
-        bookshelf.innerHTML = '';
+        bookshelf.textContent = '';
         bookshelf.className = `bookshelf view-${this.currentView}`;
         
         this.renderStandardView(bookshelf);
@@ -439,14 +460,14 @@ class VirtualBookshelf {
                 <div class="book-cover-container">
                     <div class="drag-handle">⋮⋮</div>
                     ${book.productImage ? 
-                        `<img class="book-cover lazy" data-src="${book.productImage}" alt="${book.title}">` :
-                        `<div class="book-cover-placeholder">${book.title}</div>`
+                        `<img class="book-cover lazy" data-src="${this.escapeHtml(book.productImage)}" alt="${this.escapeHtml(book.title)}">` :
+                        `<div class="book-cover-placeholder">${this.escapeHtml(book.title)}</div>`
                     }
 
                 </div>
                 <div class="book-info">
-                    <div class="book-title">${book.title}</div>
-                    <div class="book-author">${book.authors}</div>
+                    <div class="book-title">${this.escapeHtml(book.title)}</div>
+                    <div class="book-author">${this.escapeHtml(book.authors)}</div>
                     ${userNote && userNote.memo ? `<div class="book-memo">📝 ${this.formatMemoForDisplay(userNote.memo, 300)}</div>` : ''}
                     ${this.displayStarRating(userNote?.rating)}
                 </div>
@@ -456,7 +477,7 @@ class VirtualBookshelf {
                 <div class="book-cover-container">
                     <div class="drag-handle">⋮⋮</div>
                     ${book.productImage ? 
-                        `<img class="book-cover lazy" data-src="${book.productImage}" alt="${book.title}">` :
+                        `<img class="book-cover lazy" data-src="${this.escapeHtml(book.productImage)}" alt="${this.escapeHtml(book.title)}">` :
                         '<div class="book-cover-placeholder">📖</div>'
                     }
                 </div>
