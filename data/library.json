@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-09-06T06:12:55.164Z",
+  "exportDate": "2025-09-06T07:48:18.717Z",
   "books": {
     "4065412382": {
       "title": "PythonではじめるMCP開発入門 (KS情報科学専門書)",
@@ -186,7 +186,7 @@
       "source": "kindle_import",
       "addedDate": 1757074943224,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0FN2CD6TG": {
       "title": "日本人家族、ドイツに住む",
@@ -197,7 +197,7 @@
       "source": "kindle_import",
       "addedDate": 1757074943224,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B00O8K2C4U": {
       "title": "LIAR GAME 17 (ヤングジャンプコミックスDIGITAL)",
@@ -5334,7 +5334,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B07YYY3PQW": {
       "title": "数学の学び方・教え方 (岩波新書)",
@@ -8611,8 +8611,8 @@
       "productImage": "https://m.media-amazon.com/images/I/5172c13r-ZL.jpg",
       "source": "kindle_import",
       "addedDate": 1757091211511,
-      "memo": "",
-      "rating": 0
+      "memo": "もはや古典の名作SF",
+      "rating": 5
     },
     "B09T3L7TDK": {
       "title": "越境学習入門",
@@ -8909,7 +8909,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 5
     },
     "B0CWF6B63D": {
       "title": "宗像教授世界篇（３） (ビッグコミックススペシャル)",
@@ -9129,7 +9129,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0CWZCRGZP": {
       "title": "教師のためのChatGPT ホントに使えるプロンプト－授業・校務の大革命！",
@@ -26044,48 +26044,10 @@
       "createdAt": "2025-09-05T12:26:43.335Z"
     },
     {
-      "id": "bookshelf_1757119989367",
-      "name": "おすすめ技術書",
-      "emoji": "📚",
-      "description": "おすすめの技術書",
-      "books": [
-        "B0FKSG95HV",
-        "B0DSXYFVRN"
-      ],
-      "createdAt": "2025-09-06T00:53:09.367Z"
-    },
-    {
-      "id": "bookshelf_1757120002170",
-      "name": "おすすめビジネス書",
-      "emoji": "📚",
-      "description": "",
-      "books": [
-        "B0DVBZ7MCK",
-        "B0DQ81M5TF",
-        "B09SNYQSM4",
-        "B079VNN2FX",
-        "B079PPSQWN",
-        "B009IXHOJU",
-        "B074FS2QLZ",
-        "B07J28P6GN",
-        "B01I3589FQ",
-        "B00J8DTRW2",
-        "B072FGTM65",
-        "B01MYF4SD7",
-        "B00DOT529S",
-        "B0816DC5PZ",
-        "B0BX3XHCQG",
-        "B00B42SX70",
-        "B0CYZP11JP",
-        "B084SP5PLQ"
-      ],
-      "createdAt": "2025-09-06T00:53:22.170Z"
-    },
-    {
       "id": "bookshelf_1757120031680",
       "name": "おすすめの漫画",
       "emoji": "📚",
-      "description": "おすすめの漫画",
+      "description": "おすすめの漫画です。複数巻の漫画は適当に選んだ任意の一巻です",
       "books": [
         "B0F5WSZRWG",
         "B00ARAH2OA",
@@ -26152,9 +26114,53 @@
         "B00YV3ZR3C",
         "B097GX8NP1",
         "B009KWUDME",
-        "B07LB65BHP"
+        "B07LB65BHP",
+        "B0FN2CD6TG",
+        "B09BDZ5RSJ",
+        "B00MORJOR2",
+        "B07L4MWMZY",
+        "B01532F4KA"
       ],
       "createdAt": "2025-09-06T00:53:51.680Z"
+    },
+    {
+      "id": "bookshelf_1757119989367",
+      "name": "おすすめ技術書",
+      "emoji": "📚",
+      "description": "おすすめの技術書",
+      "books": [
+        "B0FKSG95HV",
+        "B0DSXYFVRN"
+      ],
+      "createdAt": "2025-09-06T00:53:09.367Z"
+    },
+    {
+      "id": "bookshelf_1757120002170",
+      "name": "おすすめビジネス書",
+      "emoji": "📚",
+      "description": "",
+      "books": [
+        "B0DVBZ7MCK",
+        "B0DQ81M5TF",
+        "B09SNYQSM4",
+        "B079VNN2FX",
+        "B079PPSQWN",
+        "B009IXHOJU",
+        "B074FS2QLZ",
+        "B07J28P6GN",
+        "B01I3589FQ",
+        "B00J8DTRW2",
+        "B072FGTM65",
+        "B01MYF4SD7",
+        "B00DOT529S",
+        "B0816DC5PZ",
+        "B0BX3XHCQG",
+        "B00B42SX70",
+        "B0CYZP11JP",
+        "B084SP5PLQ",
+        "B0CNRK6QPT"
+      ],
+      "createdAt": "2025-09-06T00:53:22.170Z"
     },
     {
       "id": "bookshelf_1757120082278",
@@ -26163,7 +26169,8 @@
       "description": "ブログなどに感想を書いた書籍",
       "books": [
         "4065412382",
-        "B0CVL7DSBQ"
+        "B0CVL7DSBQ",
+        "B07L4MWMZY"
       ],
       "createdAt": "2025-09-06T00:54:42.278Z"
     },
@@ -26189,7 +26196,7 @@
     "showHighlights": true,
     "currentBookshelf": "all",
     "theme": "light",
-    "booksPerPage": "all",
+    "booksPerPage": "50",
     "showImagesInOverview": true
   },
   "bookOrder": {
@@ -26280,7 +26287,7 @@
   },
   "stats": {
     "totalBooks": 2366,
-    "notesCount": 116
+    "notesCount": 122
   },
   "version": "2.0"
 }
