@@ -3820,26 +3820,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "ロマンピンク第２巻",
-      "authors": "北里ナヲキ",
-      "acquiredTime": 1735025283705,
-      "readStatus": "READ",
-      "asin": "B00QN3I3CA",
-      "productImage": "https://m.media-amazon.com/images/I/51+BDO5z0DL.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "ロマンピンク第１巻",
-      "authors": "北里ナヲキ",
-      "acquiredTime": 1735025272851,
-      "readStatus": "READ",
-      "asin": "B00QN3I30M",
-      "productImage": "https://m.media-amazon.com/images/I/51YQ6S-GrvL.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "Python FastAPI本格入門",
       "authors": "樹下 雅章",
       "acquiredTime": 1735015334383,
@@ -7469,33 +7449,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "地獄先生ぬ～べ～ 30周年記念傑作選 1 ガチホラー編 (ジャンプコミックスDIGITAL)",
-      "authors": "真倉翔, 岡野剛",
-      "acquiredTime": 1721735149014,
-      "readStatus": "READ",
-      "asin": "B0CF8HYPVT",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "地獄先生ぬ～べ～ 30周年記念傑作選 2 人気キャラ編 (ジャンプコミックスDIGITAL)",
-      "authors": "真倉翔, 岡野剛",
-      "acquiredTime": 1721735148814,
-      "readStatus": "READ",
-      "asin": "B0CF8MD8TX",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "地獄先生ぬ～べ～ 30周年記念傑作選 3 セクシー編 (ジャンプコミックスDIGITAL)",
-      "authors": "真倉翔, 岡野剛",
-      "acquiredTime": 1721735148797,
-      "readStatus": "READ",
-      "asin": "B0CF8LN5NV",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "ザ・スタートアップ――ネット起業！あのバカにやらせてみよう",
       "authors": "岡本 呻也",
       "acquiredTime": 1721608954117,
@@ -8061,15 +8014,6 @@
       "readStatus": "READ",
       "asin": "B0CVQ7PMTM",
       "productImage": "https://m.media-amazon.com/images/I/514e4ke3D0L.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "十戒",
-      "authors": "夕木春央",
-      "acquiredTime": 1714997226366,
-      "readStatus": "READ",
-      "asin": "B0CD79BB5C",
       "source": "kindle_import",
       "addedDate": 1757091211511
     },
@@ -13884,15 +13828,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "Shrink～精神科医ヨワイ～【期間限定無料】 1 (ヤングジャンプコミックスDIGITAL)",
-      "authors": "七海仁, 月子",
-      "acquiredTime": 1653105892972,
-      "readStatus": "READ",
-      "asin": "B0B186Q8BR",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "レベルMAXバージョンの桃太郎",
       "authors": "早志コウ",
       "acquiredTime": 1652793263352,
@@ -15052,15 +14987,6 @@
       "readStatus": "READ",
       "asin": "B09BHTY4Z8",
       "productImage": "https://m.media-amazon.com/images/I/51aCAL8dGTL.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "【期間限定 無料版】異世界少女も楽じゃない!!",
-      "authors": "Perico, 景山愁",
-      "acquiredTime": 1642323126750,
-      "readStatus": "READ",
-      "asin": "B09PYLR9KD",
       "source": "kindle_import",
       "addedDate": 1757091211511
     },
@@ -16383,33 +16309,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "ミステリと言う勿れ（３）【期間限定　無料お試し版】 (フラワーコミックスα)",
-      "authors": "田村由美",
-      "acquiredTime": 1626102024305,
-      "readStatus": "READ",
-      "asin": "B0987D3GD9",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "ミステリと言う勿れ（２）【期間限定　無料お試し版】 (フラワーコミックスα)",
-      "authors": "田村由美",
-      "acquiredTime": 1626101992506,
-      "readStatus": "READ",
-      "asin": "B0987B8SSL",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "ミステリと言う勿れ（１）【期間限定　無料お試し版】 (フラワーコミックスα)",
-      "authors": "田村由美",
-      "acquiredTime": 1626093801333,
-      "readStatus": "READ",
-      "asin": "B0987BC7PJ",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "テスト駆動Python",
       "authors": "BrianOkken",
       "acquiredTime": 1624877920538,
@@ -17229,33 +17128,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "阿・吽（４）【期間限定　無料お試し版】 (ビッグコミックススペシャル)",
-      "authors": "おかざき真里",
-      "acquiredTime": 1617535921350,
-      "readStatus": "READ",
-      "asin": "B08Z3BDK9G",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "阿・吽（３）【期間限定　無料お試し版】 (ビッグコミックススペシャル)",
-      "authors": "おかざき真里",
-      "acquiredTime": 1617535911779,
-      "readStatus": "READ",
-      "asin": "B08Z38CPV5",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "阿・吽（２）【期間限定　無料お試し版】 (ビッグコミックススペシャル)",
-      "authors": "おかざき真里",
-      "acquiredTime": 1617535895041,
-      "readStatus": "READ",
-      "asin": "B08Z2VM11S",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "阿・吽（１） (ビッグコミックススペシャル)",
       "authors": "おかざき真里",
       "acquiredTime": 1617528438731,
@@ -17372,15 +17244,6 @@
       "readStatus": "READ",
       "asin": "B08KJ5LMNQ",
       "productImage": "https://m.media-amazon.com/images/I/51wnLXEr39L.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "葬送のフリーレン（１）【期間限定　無料お試し版】 (少年サンデーコミックス)",
-      "authors": "山田鐘人, アベツカサ",
-      "acquiredTime": 1615989229125,
-      "readStatus": "READ",
-      "asin": "B08Y1MPVZR",
       "source": "kindle_import",
       "addedDate": 1757091211511
     },
@@ -17561,15 +17424,6 @@
       "readStatus": "READ",
       "asin": "B08SC4C23S",
       "productImage": "https://m.media-amazon.com/images/I/51Yzof+OwjL.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "数字であそぼ。（１）【期間限定　無料お試し版】 (フラワーコミックスα)",
-      "authors": "絹田村子",
-      "acquiredTime": 1611100391041,
-      "readStatus": "READ",
-      "asin": "B08SBF5GJG",
       "source": "kindle_import",
       "addedDate": 1757091211511
     },
@@ -18387,33 +18241,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "重版出来！（３）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "松田奈緒子",
-      "acquiredTime": 1597015468141,
-      "readStatus": "READ",
-      "asin": "B08F4T88R8",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "重版出来！（２）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "松田奈緒子",
-      "acquiredTime": 1596989039421,
-      "readStatus": "READ",
-      "asin": "B08F4V2C13",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "重版出来！（１）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "松田奈緒子",
-      "acquiredTime": 1596989006121,
-      "readStatus": "READ",
-      "asin": "B08F4SM6G1",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "プロトタイプシティ　深センと世界的イノベーション (角川書店単行本)",
       "authors": "高須 正和, 高口 康太, 澤田 翔, 藤岡 淳一, 伊藤 亜聖, 山形 浩生",
       "acquiredTime": 1596202982324,
@@ -19062,33 +18889,6 @@
       "addedDate": 1757091211511
     },
     {
-      "title": "ラーメン発見伝（３）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "河合単, 久部緑郎",
-      "acquiredTime": 1583492628767,
-      "readStatus": "READ",
-      "asin": "B085DSTVMT",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "ラーメン発見伝（２）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "河合単, 久部緑郎",
-      "acquiredTime": 1583492619805,
-      "readStatus": "READ",
-      "asin": "B085DQ33HK",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "ラーメン発見伝（１）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "河合単, 久部緑郎",
-      "acquiredTime": 1583492601632,
-      "readStatus": "READ",
-      "asin": "B085DDRXFX",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
       "title": "シン・ニホン AI×データ時代における日本の再生と人材育成 (NewsPicksパブリッシング)",
       "authors": "安宅和人",
       "acquiredTime": 1582544538367,
@@ -19134,15 +18934,6 @@
       "readStatus": "READ",
       "asin": "B07TBJH7H4",
       "productImage": "https://m.media-amazon.com/images/I/51tTa03x25L.jpg",
-      "source": "kindle_import",
-      "addedDate": 1757091211511
-    },
-    {
-      "title": "映像研には手を出すな！（１）【期間限定　無料お試し版】 (ビッグコミックス)",
-      "authors": "大童澄瞳",
-      "acquiredTime": 1578238619587,
-      "readStatus": "UNKNOWN",
-      "asin": "B0834VS1QG",
       "source": "kindle_import",
       "addedDate": 1757091211511
     },
@@ -24127,15 +23918,6 @@
       "addedDate": 1757091211512
     },
     {
-      "title": "【電子版】ヤングアニマルNo.6（2014年） 【期間限定 無料お試し版】",
-      "authors": "ヤングアニマル編集部",
-      "acquiredTime": 1399123794010,
-      "readStatus": "UNKNOWN",
-      "asin": "B00JUES97S",
-      "source": "kindle_import",
-      "addedDate": 1757091211512
-    },
-    {
       "title": "セクサロイド(1)",
       "authors": "松本零士",
       "acquiredTime": 1399123779596,
@@ -24294,15 +24076,6 @@
       "addedDate": 1757091211512
     },
     {
-      "title": "アド・アストラ　―スキピオとハンニバル― 1 【期間限定 無料お試し版】 (ヤングジャンプコミックスDIGITAL)",
-      "authors": "カガノミハチ",
-      "acquiredTime": 1393144847334,
-      "readStatus": "UNKNOWN",
-      "asin": "B00I7LJNKM",
-      "source": "kindle_import",
-      "addedDate": 1757091211512
-    },
-    {
       "title": "How to Speak and Write Correctly (English Edition)",
       "authors": "Joseph Devlin",
       "acquiredTime": 1391844436122,
@@ -24351,12 +24124,22 @@
       "productImage": "https://m.media-amazon.com/images/I/513Pg-PbN5L.jpg",
       "source": "kindle_import",
       "addedDate": 1757091211512
+    },
+    {
+      "asin": "B0FHPWB4KS",
+      "title": "十戒 (講談社文庫)",
+      "authors": "夕木春央",
+      "acquiredTime": 1714953600000,
+      "readStatus": "UNKNOWN",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B0FHPWB4KS.01.L.jpg",
+      "source": "manual_add",
+      "addedDate": 1757122294330
     }
   ],
   "metadata": {
-    "totalBooks": 2449,
-    "manuallyAdded": 1,
-    "importedFromKindle": 2448,
+    "totalBooks": 2425,
+    "manuallyAdded": 2,
+    "importedFromKindle": 2423,
     "lastImportDate": 1757091211512
   }
 }

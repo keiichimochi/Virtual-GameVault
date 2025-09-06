@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-09-05T16:54:38.332Z",
+  "exportDate": "2025-09-06T01:37:28.451Z",
   "bookshelves": [
     {
       "id": "bookshelf_1757075203335",
@@ -14,6 +14,128 @@
         "B092LY4HN9"
       ],
       "createdAt": "2025-09-05T12:26:43.335Z"
+    },
+    {
+      "id": "bookshelf_1757119989367",
+      "name": "おすすめ技術書",
+      "emoji": "📚",
+      "description": "おすすめの技術書",
+      "books": [
+        "B0FKSG95HV"
+      ],
+      "createdAt": "2025-09-06T00:53:09.367Z"
+    },
+    {
+      "id": "bookshelf_1757120002170",
+      "name": "おすすめビジネス書",
+      "emoji": "📚",
+      "description": "",
+      "books": [
+        "B0DVBZ7MCK",
+        "B0DQ81M5TF",
+        "B09SNYQSM4",
+        "B079VNN2FX",
+        "B079PPSQWN",
+        "B009IXHOJU",
+        "B074FS2QLZ",
+        "B07G32RG74",
+        "B07J28P6GN",
+        "B01I3589FQ",
+        "B00J8DTRW2",
+        "B072FGTM65",
+        "B01MYF4SD7",
+        "B00DOT529S"
+      ],
+      "createdAt": "2025-09-06T00:53:22.170Z"
+    },
+    {
+      "id": "bookshelf_1757120031680",
+      "name": "おすすめの漫画",
+      "emoji": "📚",
+      "description": "おすすめの漫画",
+      "books": [
+        "B0F5WSZRWG",
+        "B00ARAH2OA",
+        "B0FG5MMSJ2",
+        "B0FCFMDD9Q",
+        "B009JZH7K8",
+        "B09ZXZZXF3",
+        "B0DRC68N3V",
+        "B0DSKGBYB4",
+        "B0DNQ7JBX5",
+        "B08L4X3G6M",
+        "B00932N1CK",
+        "B00WMKOVTW",
+        "B0DCJSBYGJ",
+        "B00U5DBVKA",
+        "B00DMU9S62",
+        "B0CNPKT5NX",
+        "B0CP5PX6FM",
+        "B0C1Y8GZPV",
+        "B00E3RFQOQ",
+        "B082YDWPDP",
+        "B0922JLQBF",
+        "B09Y57Z1YV",
+        "B07N3NRSKF",
+        "B01I0VBDII",
+        "B074NSW7TS",
+        "B012NWPQSI",
+        "B00Y2FSIJY",
+        "B00B8EX7YI",
+        "B079TNFN3L",
+        "B076V68B29",
+        "B086GYM81G",
+        "B09JKFVXYT",
+        "B09JKCC29F",
+        "B09JKGKWRT",
+        "B019O020K4",
+        "B019O020J0",
+        "B0197UVMHI",
+        "B009KWUID8",
+        "B09CGRZVLL",
+        "B07FSH8G7Z",
+        "B09FDZBTP4",
+        "B079TP9GDQ",
+        "B00UV9VJAA",
+        "B00CA07JLG",
+        "B0748C9D3D",
+        "B01NGTCARO",
+        "B07J1L1V41",
+        "B073R6CJWW",
+        "B07GWQLS46",
+        "B079TMMSLF",
+        "B079TMHCGZ",
+        "B01MTYRZEA",
+        "B01N4ELNPK",
+        "B00UTYXQD0",
+        "B01N6HD4O4",
+        "B00GWVP77W",
+        "B00BEPF4VK"
+      ],
+      "createdAt": "2025-09-06T00:53:51.680Z"
+    },
+    {
+      "id": "bookshelf_1757120082278",
+      "name": "感想を書いた書籍",
+      "emoji": "📚",
+      "description": "ブログなどに感想を書いた書籍",
+      "books": [
+        "4065412382",
+        "B0CVL7DSBQ"
+      ],
+      "createdAt": "2025-09-06T00:54:42.278Z"
+    },
+    {
+      "id": "bookshelf_1757122065159",
+      "name": "おすすめ小説",
+      "emoji": "📚",
+      "description": "おすすめの小説",
+      "books": [
+        "B00DOT529S",
+        "B009IXHOJU",
+        "B0FHPWB4KS"
+      ],
+      "createdAt": "2025-09-06T01:27:45.159Z"
     }
   ],
   "notes": {
@@ -44,10 +166,379 @@
     "B0FKSG95HV": {
       "memo": "",
       "rating": 4
+    },
+    "B00ARAH2OA": {
+      "memo": "",
+      "rating": 4
+    },
+    "B009JZH7K8": {
+      "memo": "",
+      "rating": 5
+    },
+    "B09ZXZZXF3": {
+      "memo": "",
+      "rating": 5
+    },
+    "B0DRC68N3V": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0DVBZ7MCK": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0DSKGBYB4": {
+      "memo": "",
+      "rating": 4
+    },
+    "B08FQTLBB7": {
+      "memo": "",
+      "rating": 3
+    },
+    "B0DQ81M5TF": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0093G74ME": {
+      "memo": "",
+      "rating": 3
+    },
+    "B071P9TVSY": {
+      "memo": "",
+      "rating": 3
+    },
+    "B00932N1CK": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0DLMR2XM6": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0CB68HDGF": {
+      "memo": "",
+      "rating": 3
+    },
+    "B0DGKS9KGV": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00WMKOVTW": {
+      "memo": "",
+      "rating": 4
+    },
+    "B08DFP766V": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0D93Y6BSS": {
+      "memo": "",
+      "rating": 3
+    },
+    "B00U5DBVKA": {
+      "memo": "",
+      "rating": 4
+    },
+    "B08Q39PN6K": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0D6VBWZ9V": {
+      "memo": "",
+      "rating": 3
+    },
+    "B00DMU9S62": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00LFLDYRY": {
+      "memo": "",
+      "rating": 2
+    },
+    "B00UHIX20U": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0CNPKT5NX": {
+      "memo": "",
+      "rating": 4
+    },
+    "B010B9Y7S0": {
+      "memo": "",
+      "rating": 3
+    },
+    "B009KYBHZY": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0CP5PX6FM": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0C1Y8GZPV": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00E3RFQOQ": {
+      "memo": "",
+      "rating": 4
+    },
+    "B082YDWPDP": {
+      "memo": "",
+      "rating": 5
+    },
+    "B0922JLQBF": {
+      "memo": "",
+      "rating": 4
+    },
+    "B09Y57Z1YV": {
+      "memo": "",
+      "rating": 4
+    },
+    "B07N3NRSKF": {
+      "memo": "",
+      "rating": 4
+    },
+    "B01I0VBDII": {
+      "memo": "",
+      "rating": 5
+    },
+    "B074NSW7TS": {
+      "memo": "",
+      "rating": 4
+    },
+    "B012NWPQSI": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00Y2FSIJY": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00B8EX7YI": {
+      "memo": "",
+      "rating": 5
+    },
+    "B079TNFN3L": {
+      "memo": "",
+      "rating": 5
+    },
+    "B076V68B29": {
+      "memo": "",
+      "rating": 4
+    },
+    "B086GYM81G": {
+      "memo": "",
+      "rating": 4
+    },
+    "B09JKFVXYT": {
+      "memo": "",
+      "rating": 5
+    },
+    "B09JKCC29F": {
+      "memo": "",
+      "rating": 5
+    },
+    "B09JKGKWRT": {
+      "memo": "",
+      "rating": 5
+    },
+    "B019O020K4": {
+      "memo": "",
+      "rating": 4
+    },
+    "B019O020J0": {
+      "memo": "",
+      "rating": 5
+    },
+    "B0197UVMHI": {
+      "memo": "",
+      "rating": 5
+    },
+    "B085VNN6FV": {
+      "memo": "",
+      "rating": 4
+    },
+    "B09SNYQSM4": {
+      "memo": "",
+      "rating": 4
+    },
+    "B079VNN2FX": {
+      "memo": "",
+      "rating": 4
+    },
+    "B009KWUID8": {
+      "memo": "",
+      "rating": 5
+    },
+    "B09CGRZVLL": {
+      "memo": "",
+      "rating": 4
+    },
+    "B07FSH8G7Z": {
+      "memo": "",
+      "rating": 4
+    },
+    "B09FDZBTP4": {
+      "memo": "",
+      "rating": 4
+    },
+    "B079TP9GDQ": {
+      "memo": "",
+      "rating": 5
+    },
+    "B00UV9VJAA": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00AY7FI7O": {
+      "memo": "",
+      "rating": 3
+    },
+    "B00HFNJ61E": {
+      "memo": "",
+      "rating": 3
+    },
+    "B079PPSQWN": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00GSHI04M": {
+      "memo": "",
+      "rating": 4
+    },
+    "B07WNGXQ82": {
+      "memo": "",
+      "rating": 3
+    },
+    "B00CA07JLG": {
+      "memo": "",
+      "rating": 5
+    },
+    "B00QV8GYKA": {
+      "memo": "",
+      "rating": 3
+    },
+    "B0162AAKEC": {
+      "memo": "",
+      "rating": 4
+    },
+    "B0748C9D3D": {
+      "memo": "",
+      "rating": 4
+    },
+    "B01NGTCARO": {
+      "memo": "",
+      "rating": 4
+    },
+    "B07J1L1V41": {
+      "memo": "",
+      "rating": 4
+    },
+    "B073R6CJWW": {
+      "memo": "",
+      "rating": 4
+    },
+    "B010NPJLWO": {
+      "memo": "",
+      "rating": 3
+    },
+    "B01FRVHITM": {
+      "memo": "",
+      "rating": 5
+    },
+    "B009IXHOJU": {
+      "memo": "",
+      "rating": 4
+    },
+    "B07GWQLS46": {
+      "memo": "",
+      "rating": 4
+    },
+    "B074FS2QLZ": {
+      "memo": "",
+      "rating": 5
+    },
+    "B07G32RG74": {
+      "memo": "",
+      "rating": 4
+    },
+    "B07J28P6GN": {
+      "memo": "",
+      "rating": 4
+    },
+    "B079RBJH6H": {
+      "memo": "",
+      "rating": 3
+    },
+    "B079TMMSLF": {
+      "memo": "",
+      "rating": 5
+    },
+    "B079TMHCGZ": {
+      "memo": "",
+      "rating": 5
+    },
+    "B01I3589FQ": {
+      "memo": "",
+      "rating": 4
+    },
+    "B01MTYRZEA": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00J8DTRW2": {
+      "memo": "",
+      "rating": 4
+    },
+    "B01N4ELNPK": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00UTYXQD0": {
+      "memo": "",
+      "rating": 4
+    },
+    "B01N6HD4O4": {
+      "memo": "",
+      "rating": 5
+    },
+    "B072FGTM65": {
+      "memo": "",
+      "rating": 4
+    },
+    "B01MYF4SD7": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00GWVP77W": {
+      "memo": "",
+      "rating": 4
+    },
+    "B011UFDIZM": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00BEPF4VK": {
+      "memo": "",
+      "rating": 4
+    },
+    "B00DOT529S": {
+      "memo": "",
+      "rating": 4
+    },
+    "B09XH6ZPFF": {
+      "memo": "",
+      "rating": 3
+    },
+    "B0FHPWB4KS": {
+      "memo": "",
+      "rating": 4
     }
   },
   "settings": {
     "defaultView": "hybrid",
+    "affiliateId": "vbookshelf-22",
     "showHighlights": true,
     "currentBookshelf": "all",
     "theme": "light",
@@ -81,8 +572,8 @@
     ]
   },
   "stats": {
-    "totalBooks": 2449,
-    "notesCount": 7
+    "totalBooks": 2425,
+    "notesCount": 99
   },
   "version": "1.0"
 }
