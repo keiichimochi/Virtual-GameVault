@@ -21505,15 +21505,6 @@
       "addedDate": 1757091211512
     },
     {
-      "title": "破天荒フェニックス オンデーズ再生物語 (NewsPicks Book)",
-      "authors": "田中修治",
-      "acquiredTime": 1543208348537,
-      "readStatus": "READ",
-      "asin": "B07G32RG74",
-      "source": "kindle_import",
-      "addedDate": 1757091211512
-    },
-    {
       "title": "森には森の風が吹く",
       "authors": "森博嗣",
       "acquiredTime": 1542535870478,
@@ -24134,12 +24125,22 @@
       "productImage": "https://images-na.ssl-images-amazon.com/images/P/B0FHPWB4KS.01.L.jpg",
       "source": "manual_add",
       "addedDate": 1757122294330
+    },
+    {
+      "asin": "B0816DC5PZ",
+      "title": "破天荒フェニックス",
+      "authors": "田中修治",
+      "acquiredTime": 1543190400000,
+      "readStatus": "UNKNOWN",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B0816DC5PZ.01.L.jpg",
+      "source": "manual_add",
+      "addedDate": 1757123638326
     }
   ],
   "metadata": {
     "totalBooks": 2425,
-    "manuallyAdded": 2,
-    "importedFromKindle": 2423,
+    "manuallyAdded": 3,
+    "importedFromKindle": 2422,
     "lastImportDate": 1757091211512
   }
 }

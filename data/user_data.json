@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-09-06T01:37:28.451Z",
+  "exportDate": "2025-09-06T01:57:54.746Z",
   "bookshelves": [
     {
       "id": "bookshelf_1757075203335",
@@ -38,13 +38,13 @@
         "B079PPSQWN",
         "B009IXHOJU",
         "B074FS2QLZ",
-        "B07G32RG74",
         "B07J28P6GN",
         "B01I3589FQ",
         "B00J8DTRW2",
         "B072FGTM65",
         "B01MYF4SD7",
-        "B00DOT529S"
+        "B00DOT529S",
+        "B0816DC5PZ"
       ],
       "createdAt": "2025-09-06T00:53:22.170Z"
     },
@@ -103,7 +103,6 @@
         "B07J1L1V41",
         "B073R6CJWW",
         "B07GWQLS46",
-        "B079TMMSLF",
         "B079TMHCGZ",
         "B01MTYRZEA",
         "B01N4ELNPK",
@@ -459,10 +458,6 @@
       "memo": "",
       "rating": 5
     },
-    "B07G32RG74": {
-      "memo": "",
-      "rating": 4
-    },
     "B07J28P6GN": {
       "memo": "",
       "rating": 4
@@ -538,11 +533,11 @@
   },
   "settings": {
     "defaultView": "hybrid",
-    "affiliateId": "vbookshelf-22",
     "showHighlights": true,
     "currentBookshelf": "all",
     "theme": "light",
-    "booksPerPage": 50
+    "booksPerPage": 50,
+    "showImagesInOverview": true
   },
   "bookOrder": {
     "all": [
@@ -569,11 +564,70 @@
       "B0DSD56LM2",
       "B0CVL7DSBQ",
       "B08R632HML"
+    ],
+    "bookshelf_1757120031680": [
+      "B0F5WSZRWG",
+      "B00ARAH2OA",
+      "B09ZXZZXF3",
+      "B082YDWPDP",
+      "B0FG5MMSJ2",
+      "B0FCFMDD9Q",
+      "B009JZH7K8",
+      "B0DRC68N3V",
+      "B0DSKGBYB4",
+      "B08L4X3G6M",
+      "B0DNQ7JBX5",
+      "B00932N1CK",
+      "B00WMKOVTW",
+      "B0DCJSBYGJ",
+      "B00U5DBVKA",
+      "B00DMU9S62",
+      "B0CNPKT5NX",
+      "B0CP5PX6FM",
+      "B0C1Y8GZPV",
+      "B00E3RFQOQ",
+      "B0922JLQBF",
+      "B07N3NRSKF",
+      "B09Y57Z1YV",
+      "B01I0VBDII",
+      "B074NSW7TS",
+      "B00Y2FSIJY",
+      "B012NWPQSI",
+      "B00B8EX7YI",
+      "B079TNFN3L",
+      "B076V68B29",
+      "B086GYM81G",
+      "B09JKFVXYT",
+      "B09JKCC29F",
+      "B09JKGKWRT",
+      "B019O020K4",
+      "B019O020J0",
+      "B0197UVMHI",
+      "B009KWUID8",
+      "B09CGRZVLL",
+      "B07FSH8G7Z",
+      "B09FDZBTP4",
+      "B079TP9GDQ",
+      "B00UV9VJAA",
+      "B00CA07JLG",
+      "B0748C9D3D",
+      "B01NGTCARO",
+      "B07J1L1V41",
+      "B073R6CJWW",
+      "B07GWQLS46",
+      "B079TMMSLF",
+      "B079TMHCGZ",
+      "B01MTYRZEA",
+      "B00UTYXQD0",
+      "B01N4ELNPK",
+      "B01N6HD4O4",
+      "B00GWVP77W",
+      "B00BEPF4VK"
     ]
   },
   "stats": {
     "totalBooks": 2425,
-    "notesCount": 99
+    "notesCount": 98
   },
   "version": "1.0"
 }

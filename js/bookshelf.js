@@ -564,14 +564,37 @@ class VirtualBookshelf {
                         </div>
                         
                         <div class="bookshelf-actions" style="margin-top: 1rem;">
-                            <label for="bookshelf-select-${book.asin}">📚 本棚に追加:</label>
-                            <select id="bookshelf-select-${book.asin}" class="bookshelf-select">
-                                <option value="">本棚を選択...</option>
-                                ${this.userData.bookshelves ? this.userData.bookshelves.map(bs => 
-                                    `<option value="${bs.id}">${bs.emoji || '📚'} ${bs.name}</option>`
-                                ).join('') : ''}
-                            </select>
-                            <button class="btn btn-secondary add-to-bookshelf" data-asin="${book.asin}">追加</button>
+                            <div style="margin-bottom: 1rem;">
+                                <label for="bookshelf-select-${book.asin}">📚 本棚に追加:</label>
+                                <select id="bookshelf-select-${book.asin}" class="bookshelf-select">
+                                    <option value="">本棚を選択...</option>
+                                    ${this.userData.bookshelves ? this.userData.bookshelves.map(bs => 
+                                        `<option value="${bs.id}">${bs.emoji || '📚'} ${bs.name}</option>`
+                                    ).join('') : ''}
+                                </select>
+                                <button class="btn btn-secondary add-to-bookshelf" data-asin="${book.asin}">追加</button>
+                            </div>
+                            
+                            <div class="current-bookshelves">
+                                <label>📚 現在の本棚:</label>
+                                <div id="current-bookshelves-${book.asin}">
+                                    ${this.userData.bookshelves ? this.userData.bookshelves
+                                        .filter(bs => bs.books && bs.books.includes(book.asin))
+                                        .map(bs => `
+                                            <div class="bookshelf-item" style="display: inline-flex; align-items: center; margin: 0.25rem; padding: 0.25rem 0.5rem; background-color: #f0f0f0; border-radius: 4px;">
+                                                <span>${bs.emoji || '📚'} ${bs.name}</span>
+                                                <button class="btn btn-small btn-danger remove-from-bookshelf" 
+                                                        data-asin="${book.asin}" 
+                                                        data-bookshelf-id="${bs.id}" 
+                                                        style="margin-left: 0.5rem; padding: 0.125rem 0.25rem; font-size: 0.75rem;">
+                                                    ❌
+                                                </button>
+                                            </div>
+                                        `).join('') : ''}
+                                </div>
+                                ${this.userData.bookshelves && this.userData.bookshelves.filter(bs => bs.books && bs.books.includes(book.asin)).length === 0 ? 
+                                    '<p style="color: #888; font-style: italic; margin: 0.5rem 0;">この本はまだどの本棚にも追加されていません</p>' : ''}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -608,6 +631,15 @@ class VirtualBookshelf {
         
         modalBody.querySelector('.add-to-bookshelf').addEventListener('click', (e) => {
             this.addBookToBookshelf(e.target.dataset.asin);
+        });
+        
+        // Remove from bookshelf buttons
+        modalBody.querySelectorAll('.remove-from-bookshelf').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const asin = e.target.dataset.asin;
+                const bookshelfId = e.target.dataset.bookshelfId;
+                this.removeFromBookshelf(asin, bookshelfId);
+            });
         });
         
         // Rating reset button
@@ -815,11 +847,14 @@ class VirtualBookshelf {
     }
 
     exportUserData() {
+        // Create settings without affiliateId (which comes from config file)
+        const { affiliateId, ...settingsWithoutAffiliateId } = this.userData.settings;
+        
         const exportData = {
             exportDate: new Date().toISOString(),
             bookshelves: this.userData.bookshelves,
             notes: this.userData.notes,
-            settings: this.userData.settings,
+            settings: settingsWithoutAffiliateId,
             bookOrder: this.userData.bookOrder || {},
             stats: {
                 totalBooks: this.books.length,
@@ -1030,6 +1065,39 @@ class VirtualBookshelf {
         
         // Reset the dropdown
         bookshelfSelect.value = '';
+    }
+
+    removeFromBookshelf(asin, bookshelfId) {
+        const bookshelf = this.userData.bookshelves.find(b => b.id === bookshelfId);
+        if (!bookshelf || !bookshelf.books) {
+            alert('❌ 本棚が見つかりません');
+            return;
+        }
+        
+        const book = this.books.find(b => b.asin === asin);
+        const bookTitle = book ? book.title : 'この本';
+        
+        if (!bookshelf.books.includes(asin)) {
+            alert(`📚 この本は「${bookshelf.name}」にありません`);
+            return;
+        }
+        
+        if (confirm(`📚 「${bookTitle}」を「${bookshelf.name}」から除外しますか？\n\n⚠️ 本自体は削除されず、この本棚からのみ削除されます。`)) {
+            bookshelf.books = bookshelf.books.filter(bookAsin => bookAsin !== asin);
+            this.saveUserData();
+            this.renderBookshelfList(); // Update the bookshelf management UI if open
+            
+            // If currently viewing this bookshelf, update the display
+            if (this.currentBookshelf === bookshelfId) {
+                this.applyFilters();
+                this.updateDisplay();
+            }
+            
+            alert(`✅ 「${bookTitle}」を「${bookshelf.name}」から除外しました`);
+            
+            // Close modal to show the updated bookshelf
+            this.closeModal();
+        }
     }
 
     /**
