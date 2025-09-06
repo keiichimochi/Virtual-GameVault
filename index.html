@@ -87,6 +87,17 @@
                         </select>
                         <button id="sort-direction" class="btn btn-small">↓ 新しい順</button>
                     </div>
+                    
+                    <div class="filter-group">
+                        <label>表示数</label>
+                        <select id="books-per-page">
+                            <option value="25">25冊</option>
+                            <option value="50" selected>50冊</option>
+                            <option value="100">100冊</option>
+                            <option value="200">200冊</option>
+                            <option value="all">全て表示</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="stats-section">
@@ -110,6 +121,7 @@
                             <button id="import-kindle" class="btn btn-secondary">📥 Kindleインポート</button>
                             <button id="add-book-manually" class="btn btn-secondary">➕ 手動追加</button>
                             <button id="export-library" class="btn btn-secondary">💾 蔵書エクスポート</button>
+                            <button id="clear-library" class="btn btn-danger">🗑️ 蔵書をクリア</button>
                         </div>
                     </div>
                 </div>

@@ -79,6 +79,16 @@ class VirtualBookshelf {
         if (this.currentView === 'hybrid') {
             this.currentView = 'covers';
         }
+        
+        // Load books per page setting
+        if (this.userData.settings.booksPerPage) {
+            if (this.userData.settings.booksPerPage === 'all') {
+                this.booksPerPage = 999999;
+            } else {
+                this.booksPerPage = this.userData.settings.booksPerPage;
+            }
+            document.getElementById('books-per-page').value = this.userData.settings.booksPerPage;
+        }
         this.showImagesInOverview = this.userData.settings.showImagesInOverview !== false; // Default true
         this.applyFilters();
     }
@@ -111,6 +121,11 @@ class VirtualBookshelf {
         
         document.getElementById('sort-direction').addEventListener('click', () => {
             this.toggleSortDirection();
+        });
+
+        // Books per page
+        document.getElementById('books-per-page').addEventListener('change', (e) => {
+            this.setBooksPerPage(e.target.value);
         });
 
         // Bookshelf selector
@@ -185,6 +200,11 @@ class VirtualBookshelf {
         if (addManuallyBtn) {
             addManuallyBtn.addEventListener('click', () => this.addBookManually());
         }
+
+        // Clear library button
+        document.getElementById('clear-library').addEventListener('click', () => {
+            this.clearLibrary();
+        });
     }
 
     setView(view) {
@@ -274,6 +294,24 @@ class VirtualBookshelf {
         this.updateSortDirectionButton();
         this.applySorting();
     }
+
+    setBooksPerPage(value) {
+        if (value === 'all') {
+            this.booksPerPage = this.filteredBooks.length || 999999;
+        } else {
+            this.booksPerPage = parseInt(value);
+        }
+        this.currentPage = 1;
+        
+        // Save the setting
+        if (!this.userData.settings) {
+            this.userData.settings = {};
+        }
+        this.userData.settings.booksPerPage = value;
+        
+        this.updateDisplay();
+        this.saveUserData();
+    }
     
     updateSortDirectionButton() {
         const button = document.getElementById('sort-direction');
@@ -337,9 +375,17 @@ class VirtualBookshelf {
             });
         }
         
-        const startIndex = (this.currentPage - 1) * this.booksPerPage;
-        const endIndex = startIndex + this.booksPerPage;
-        const booksToShow = booksToRender.slice(startIndex, endIndex);
+        // Handle pagination
+        let booksToShow;
+        if (this.booksPerPage >= this.filteredBooks.length) {
+            // Show all books
+            booksToShow = booksToRender;
+        } else {
+            // Show paginated books
+            const startIndex = (this.currentPage - 1) * this.booksPerPage;
+            const endIndex = startIndex + this.booksPerPage;
+            booksToShow = booksToRender.slice(startIndex, endIndex);
+        }
         
         booksToShow.forEach(book => {
             container.appendChild(this.createBookElement(book, this.currentView));
@@ -380,7 +426,7 @@ class VirtualBookshelf {
                     <div class="drag-handle">⋮⋮</div>
                     ${book.productImage ? 
                         `<img class="book-cover lazy" data-src="${book.productImage}" alt="${book.title}">` :
-                        `<div class="book-cover-placeholder">📖</div>`
+                        '<div class="book-cover-placeholder">📖</div>'
                     }
                 </div>
                 <div class="book-info">
@@ -533,7 +579,7 @@ class VirtualBookshelf {
                 <div class="book-detail-header">
                     ${book.productImage ? 
                         `<img class="book-detail-cover" src="${book.productImage}" alt="${book.title}">` :
-                        `<div class="book-detail-cover-placeholder">📖</div>`
+                        '<div class="book-detail-cover-placeholder">📖</div>'
                     }
                     <div class="book-detail-info">
                         <div class="book-edit-section">
@@ -814,7 +860,8 @@ class VirtualBookshelf {
         const pagination = document.getElementById('pagination');
         const totalPages = Math.ceil(this.filteredBooks.length / this.booksPerPage);
         
-        if (totalPages <= 1) {
+        // Hide pagination if showing all books or only one page
+        if (totalPages <= 1 || this.booksPerPage >= this.filteredBooks.length) {
             pagination.innerHTML = '';
             return;
         }
@@ -860,7 +907,7 @@ class VirtualBookshelf {
                 totalBooks: this.books.length,
                 notesCount: Object.keys(this.userData.notes).length
             },
-            version: "1.0"
+            version: '1.0'
         };
         
         const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
@@ -884,7 +931,7 @@ class VirtualBookshelf {
             settings: this.userData.settings,
             bookOrder: this.userData.bookOrder,
             backupTimestamp: Date.now(),
-            version: "1.0"
+            version: '1.0'
         };
         
         const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
@@ -1601,6 +1648,60 @@ class VirtualBookshelf {
         alert('📦 蔵書データをエクスポートしました！\n\nダウンロードしたファイルを data/my_library.json として保存してGitHubにpushすると、蔵書データが永続化されます。');
     }
 
+    /**
+     * 蔵書を全てクリア
+     */
+    async clearLibrary() {
+        const confirmMessage = `🗑️ 蔵書を全てクリアしますか？
+
+この操作により以下のデータが削除されます：
+• 全ての書籍データ
+• 評価・メモは保持されます
+• 本棚設定は保持されます
+
+この操作は元に戻せません。`;
+        
+        if (!confirm(confirmMessage)) {
+            return;
+        }
+        
+        try {
+            this.showLoading();
+            
+            // BookManagerで蔵書をクリア
+            await this.bookManager.clearAllBooks();
+            
+            // userDataが存在する場合のみ処理
+            if (this.userData && this.userData.bookshelves) {
+                // ユーザーデータの本棚から書籍を削除
+                this.userData.bookshelves.forEach(shelf => {
+                    shelf.books = [];
+                });
+                
+                // 並び順データもクリア
+                if (this.userData.bookOrder) {
+                    this.userData.bookOrder = {};
+                }
+            }
+            
+            // 本のリストを更新
+            this.books = [];
+            this.filteredBooks = [];
+            
+            // UIを更新
+            this.saveUserData();
+            this.updateDisplay();
+            this.updateStats();
+            
+            alert('✅ 蔵書を全てクリアしました');
+        } catch (error) {
+            console.error('蔵書クリア中にエラーが発生しました:', error);
+            alert('❌ 蔵書のクリアに失敗しました: ' + error.message);
+        } finally {
+            this.hideLoading();
+        }
+    }
+
     renderBookshelfOverview() {
         const overviewSection = document.getElementById('bookshelves-overview');
         const grid = document.getElementById('bookshelves-grid');
@@ -1651,7 +1752,7 @@ class VirtualBookshelf {
                             if (book && book.productImage) {
                                 return `<div class="bookshelf-preview-book"><img src="${book.productImage}" alt="${book.title}"></div>`;
                             } else {
-                                return `<div class="bookshelf-preview-book bookshelf-preview-placeholder">📖</div>`;
+                                return '<div class="bookshelf-preview-book bookshelf-preview-placeholder">📖</div>';
                             }
                         }).join('')}
                     </div>
@@ -1715,6 +1816,16 @@ class VirtualBookshelf {
         this.saveUserData();
     }
     
+    /**
+     * ローディング表示
+     */
+    showLoading() {
+        const loading = document.getElementById('loading');
+        if (loading) {
+            loading.style.display = 'block';
+        }
+    }
+
     hideLoading() {
         const loading = document.getElementById('loading');
         if (loading) {

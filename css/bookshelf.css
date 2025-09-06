@@ -900,6 +900,16 @@ body {
     color: white !important;
 }
 
+.management-buttons .btn-danger {
+    margin: 0;
+    background-color: #e74c3c;
+    border: 1px solid #c0392b;
+}
+
+.management-buttons .btn-danger:hover {
+    background-color: #c0392b;
+}
+
 /* Import Modal Styles */
 .import-options {
     display: flex;

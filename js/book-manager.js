@@ -348,6 +348,22 @@ class BookManager {
     }
 
     /**
+     * 蔵書を全てクリア
+     */
+    async clearAllBooks() {
+        this.library.books = [];
+        this.library.metadata = {
+            totalBooks: 0,
+            manuallyAdded: 0,
+            importedFromKindle: 0,
+            lastImportDate: null
+        };
+        
+        await this.saveLibrary();
+        return true;
+    }
+
+    /**
      * 書籍情報を更新
      */
     async updateBook(asin, updates) {
