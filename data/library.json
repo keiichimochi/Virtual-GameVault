@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-09-06T09:42:30.761Z",
+  "exportDate": "2025-09-06T10:01:27.767Z",
   "books": {
     "4065412382": {
       "title": "PythonではじめるMCP開発入門 (KS情報科学専門書)",
@@ -23989,7 +23989,7 @@
       "productImage": "https://m.media-amazon.com/images/I/51Yzy9GVg5L.jpg",
       "source": "kindle_import",
       "addedDate": 1757091211512,
-      "memo": "",
+      "memo": "[印象深い大企業・ベンチャーの経営理念・社是・Values](https://karaage.hatenadiary.jp/entry/2021/04/14/073000)",
       "rating": 5
     },
     "B078YLH4W2": {
@@ -26026,6 +26026,17 @@
       "addedDate": 1757137890777,
       "memo": "",
       "rating": 4
+    },
+    "B07W3TQ4RB": {
+      "title": "岩田さん: 岩田聡はこんなことを話していた。 (ほぼ日ブックス)",
+      "authors": "ほぼ日刊イトイ新聞",
+      "acquiredTime": 1564790400000,
+      "readStatus": "UNKNOWN",
+      "productImage": "https://images-na.ssl-images-amazon.com/images/P/B07W3TQ4RB.01.L.jpg",
+      "source": "manual_add",
+      "addedDate": 1757152377132,
+      "memo": "任天堂の元社長、岩田さんの本\n\n[おとなもこどもも、おねーさんも読んでほしい「岩田さん 岩田聡はこんなことを話していた。」](https://karaage.hatenadiary.jp/entry/2019/09/25/073000)\n\n[任天堂の宮本茂氏に学ぶ「複数の問題を一気に解決するアイデア」の重要性](https://karaage.hatenadiary.jp/entry/2025/05/05/073000)\n\n[任天堂元社長・岩田聡の仕事哲学に学ぶ。「ボトルネックを見極め、最善を尽くす」【データサイエンティスト・からあげ】](https://type.jp/et/feature/26899/)",
+      "rating": 5
     }
   },
   "bookshelves": [
@@ -26149,16 +26160,13 @@
         "B074FS2QLZ",
         "B07J28P6GN",
         "B01I3589FQ",
-        "B00J8DTRW2",
-        "B072FGTM65",
         "B01MYF4SD7",
-        "B00DOT529S",
         "B0816DC5PZ",
         "B0BX3XHCQG",
         "B00B42SX70",
-        "B0CYZP11JP",
         "B084SP5PLQ",
-        "B0CNRK6QPT"
+        "B0CNRK6QPT",
+        "B07W3TQ4RB"
       ],
       "createdAt": "2025-09-06T00:53:22.170Z"
     },
@@ -26187,7 +26195,8 @@
         "B08XQ7LWKD",
         "B081YHT19N",
         "B0BLV21VPF",
-        "B09NBZLC7J"
+        "B09NBZLC7J",
+        "B00J8DTRW2"
       ],
       "createdAt": "2025-09-06T01:27:45.159Z"
     },
@@ -26241,6 +26250,17 @@
         "B00B8EX7YI"
       ],
       "createdAt": "2025-09-06T09:31:58.669Z"
+    },
+    {
+      "id": "bookshelf_1757152652162",
+      "name": "エンタメ",
+      "emoji": "📚",
+      "description": "",
+      "books": [
+        "B072FGTM65",
+        "B0CYZP11JP"
+      ],
+      "createdAt": "2025-09-06T09:57:32.162Z"
     }
   ],
   "settings": {
@@ -26248,7 +26268,7 @@
     "showHighlights": true,
     "currentBookshelf": "all",
     "theme": "light",
-    "booksPerPage": "all",
+    "booksPerPage": "50",
     "showImagesInOverview": true
   },
   "bookOrder": {
@@ -26348,11 +26368,46 @@
       "B00MORJOR2",
       "B07L4MWMZY",
       "B00N2QXB00"
+    ],
+    "bookshelf_1757120002170": [
+      "B07W3TQ4RB",
+      "B079VNN2FX",
+      "B079PPSQWN",
+      "B00B42SX70",
+      "B0CNRK6QPT",
+      "B0DQ81M5TF",
+      "B09SNYQSM4",
+      "B074FS2QLZ",
+      "B0DVBZ7MCK",
+      "B0BX3XHCQG",
+      "B0CYZP11JP",
+      "B084SP5PLQ",
+      "B009IXHOJU",
+      "B07J28P6GN",
+      "B01I3589FQ",
+      "B00J8DTRW2",
+      "B072FGTM65",
+      "B01MYF4SD7",
+      "B00DOT529S",
+      "B0816DC5PZ"
+    ],
+    "bookshelf_1757151044846": [
+      "B09JKCCQTV",
+      "B079TP9GDQ",
+      "B00MORJOR2",
+      "B082YDWPDP",
+      "B00L0QZ6GG",
+      "B07L4MWMZY",
+      "B009KWUDME",
+      "B0157YIUNW",
+      "B00GYOE3BS",
+      "B00U5DBVKA",
+      "B09NBZLC7J"
     ]
   },
   "stats": {
-    "totalBooks": 2366,
-    "notesCount": 132
+    "totalBooks": 2367,
+    "notesCount": 133
   },
   "version": "2.0"
 }
