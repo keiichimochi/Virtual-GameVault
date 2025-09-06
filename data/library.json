@@ -1,5 +1,5 @@
 {
-  "exportDate": "2025-09-06T07:48:18.717Z",
+  "exportDate": "2025-09-06T09:42:30.761Z",
   "books": {
     "4065412382": {
       "title": "PythonではじめるMCP開発入門 (KS情報科学専門書)",
@@ -846,7 +846,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0CVZTLZLD": {
       "title": "生成AIスキルとしての言語学　誰もが「AIと話す」時代におけるヒトとテクノロジーをつなぐ言葉の入門書",
@@ -1484,7 +1484,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0F3HD8GRQ": {
       "title": "１３～１５ web漫画『呪道』",
@@ -4817,7 +4817,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B00GYOF1Q4": {
       "title": "達人伝 ～9万里を風に乗り～ ： 2 (アクションコミックス)",
@@ -6973,7 +6973,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0DFG3591X": {
       "title": "OSCクロニクル",
@@ -8216,7 +8216,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B07TZ3BMH5": {
       "title": "超ファミ漫",
@@ -8479,8 +8479,8 @@
       "productImage": "https://m.media-amazon.com/images/I/61lUUIrbwGL.jpg",
       "source": "kindle_import",
       "addedDate": 1757091211511,
-      "memo": "",
-      "rating": 0
+      "memo": "映像研最高ですね。アニメもよかったけど、漫画もよいです",
+      "rating": 5
     },
     "B0D24F7Z2Y": {
       "title": "生成AI時代のプロダクトマネジメント 勝てる事業の原則から戦略、デザイン、成功事例まで",
@@ -8942,7 +8942,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0CGLXCY85": {
       "title": "日本人のための「書く」全技術【極み】",
@@ -9690,7 +9690,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 4
+      "rating": 5
     },
     "B0CTJPMZWX": {
       "title": "指標・特徴量の設計から始めるデータ可視化学入門",
@@ -11450,7 +11450,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 4
     },
     "B0C93RV2TK": {
       "title": "マンガでわかる DX",
@@ -15707,7 +15707,7 @@
       "source": "kindle_import",
       "addedDate": 1757091211511,
       "memo": "",
-      "rating": 0
+      "rating": 5
     },
     "B09JKCC29F": {
       "title": "T・Pぼん（２） 藤子・Ｆ・不二雄大全集 (てんとう虫コミックススペシャル)",
@@ -16454,8 +16454,8 @@
       "productImage": "https://m.media-amazon.com/images/I/41Ph12gLOdL.jpg",
       "source": "kindle_import",
       "addedDate": 1757091211511,
-      "memo": "",
-      "rating": 0
+      "memo": "名作です",
+      "rating": 5
     },
     "B092YT2SLM": {
       "title": "解体屋ゲン 80巻",
@@ -26039,7 +26039,8 @@
         "B0DSD56LM2",
         "B08R632HML",
         "4065412382",
-        "B092LY4HN9"
+        "B092LY4HN9",
+        "B09875G3GL"
       ],
       "createdAt": "2025-09-05T12:26:43.335Z"
     },
@@ -26056,8 +26057,6 @@
         "B009JZH7K8",
         "B09ZXZZXF3",
         "B0DRC68N3V",
-        "B0DSKGBYB4",
-        "B0DNQ7JBX5",
         "B08L4X3G6M",
         "B00932N1CK",
         "B00WMKOVTW",
@@ -26079,8 +26078,6 @@
         "B00B8EX7YI",
         "B076V68B29",
         "B086GYM81G",
-        "B09JKFVXYT",
-        "B09JKCC29F",
         "B09JKGKWRT",
         "B019O020K4",
         "B019O020J0",
@@ -26119,7 +26116,9 @@
         "B09BDZ5RSJ",
         "B00MORJOR2",
         "B07L4MWMZY",
-        "B01532F4KA"
+        "B01532F4KA",
+        "B01N11SMHQ",
+        "B09JKCCQTV"
       ],
       "createdAt": "2025-09-06T00:53:51.680Z"
     },
@@ -26130,7 +26129,8 @@
       "description": "おすすめの技術書",
       "books": [
         "B0FKSG95HV",
-        "B0DSXYFVRN"
+        "B0DSXYFVRN",
+        "B0CK827QHL"
       ],
       "createdAt": "2025-09-06T00:53:09.367Z"
     },
@@ -26170,7 +26170,8 @@
       "books": [
         "4065412382",
         "B0CVL7DSBQ",
-        "B07L4MWMZY"
+        "B07L4MWMZY",
+        "B079TMHCGZ"
       ],
       "createdAt": "2025-09-06T00:54:42.278Z"
     },
@@ -26189,6 +26190,57 @@
         "B09NBZLC7J"
       ],
       "createdAt": "2025-09-06T01:27:45.159Z"
+    },
+    {
+      "id": "bookshelf_1757151044846",
+      "name": "SF関係",
+      "emoji": "📚",
+      "description": "",
+      "books": [
+        "B00GYOE3BS",
+        "B0157YIUNW",
+        "B09NBZLC7J",
+        "B00U5DBVKA",
+        "B00MORJOR2",
+        "B009KWUDME",
+        "B09JKCCQTV",
+        "B079TP9GDQ",
+        "B00L0QZ6GG",
+        "B07L4MWMZY",
+        "B082YDWPDP"
+      ],
+      "createdAt": "2025-09-06T09:30:44.846Z"
+    },
+    {
+      "id": "bookshelf_1757151066753",
+      "name": "少女漫画",
+      "emoji": "📚",
+      "description": "",
+      "books": [
+        "B01532F4KA"
+      ],
+      "createdAt": "2025-09-06T09:31:06.753Z"
+    },
+    {
+      "id": "bookshelf_1757151118669",
+      "name": "歴史関係",
+      "emoji": "📚",
+      "description": "歴史関係の本",
+      "books": [
+        "B0F5WSZRWG",
+        "B07DCM9FWZ",
+        "B09ZXZZXF3",
+        "B0DQXLL9CT",
+        "B00GYOF1PA",
+        "B009KYCHCG",
+        "B00DMUJ3C6",
+        "B0CBRC8RC3",
+        "B00BEPF4VK",
+        "B0DYPHPJPP",
+        "B01N6HD4O4",
+        "B00B8EX7YI"
+      ],
+      "createdAt": "2025-09-06T09:31:58.669Z"
     }
   ],
   "settings": {
@@ -26196,7 +26248,7 @@
     "showHighlights": true,
     "currentBookshelf": "all",
     "theme": "light",
-    "booksPerPage": "50",
+    "booksPerPage": "all",
     "showImagesInOverview": true
   },
   "bookOrder": {
@@ -26206,7 +26258,8 @@
       "B0DSD56LM2",
       "B092LY4HN9",
       "B08R632HML",
-      "B09875G3GL"
+      "B09875G3GL",
+      "B00ARAH2OA"
     ],
     "ai-books": [
       "B0CVL7DSBQ",
@@ -26261,13 +26314,15 @@
       "B086GYM81G",
       "B09JKFVXYT",
       "B09JKGKWRT",
-      "B019O020K4",
+      "B09JKCCQTV",
+      "B01N11SMHQ",
+      "B009KWUID8",
       "B00CA07JLG",
       "B019O020J0",
       "B01N6HD4O4",
       "B01MTYRZEA",
+      "B019O020K4",
       "B0197UVMHI",
-      "B009KWUID8",
       "B00BEPF4VK",
       "B01NGTCARO",
       "B09CGRZVLL",
@@ -26275,19 +26330,29 @@
       "B09FDZBTP4",
       "B01N4ELNPK",
       "B00UV9VJAA",
-      "B0FG5MMSJ2",
+      "B00JPXEAV8",
+      "B009KWUDME",
       "B079TMHCGZ",
       "B0748C9D3D",
       "B07J1L1V41",
       "B073R6CJWW",
       "B079TMMSLF",
       "B00UTYXQD0",
-      "B00GWVP77W"
+      "B00GWVP77W",
+      "B0FG5MMSJ2",
+      "B009KYCHCG",
+      "B09BDZ5RSJ",
+      "B0DYPHPJPP",
+      "B00L0QZ6GG",
+      "B00YV3XDBK",
+      "B00MORJOR2",
+      "B07L4MWMZY",
+      "B00N2QXB00"
     ]
   },
   "stats": {
     "totalBooks": 2366,
-    "notesCount": 122
+    "notesCount": 132
   },
   "version": "2.0"
 }
