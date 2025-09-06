@@ -11,6 +11,22 @@
     --book-height: 240px;
 }
 
+/* Cover Size Variants */
+.bookshelf.size-small {
+    --book-width: 120px;
+    --book-height: 180px;
+}
+
+.bookshelf.size-medium {
+    --book-width: 160px;
+    --book-height: 240px;
+}
+
+.bookshelf.size-large {
+    --book-width: 200px;
+    --book-height: 300px;
+}
+
 * {
     margin: 0;
     padding: 0;

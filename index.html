@@ -99,6 +99,15 @@
                             <option value="all">全て表示</option>
                         </select>
                     </div>
+                    
+                    <div class="filter-group">
+                        <label>カバーサイズ</label>
+                        <select id="cover-size">
+                            <option value="small">小 (120×180px)</option>
+                            <option value="medium" selected>中 (160×240px)</option>
+                            <option value="large">大 (200×300px)</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="stats-section">
@@ -187,6 +196,34 @@
             </div>
             <div id="bookshelves-list">
                 <!-- Bookshelves will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bookshelf Form Modal -->
+    <div id="bookshelf-form-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="bookshelf-form-modal-close">×</button>
+            <div class="modal-header">
+                <h2 id="bookshelf-form-title">📚 新しい本棚</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="bookshelf-name">本棚の名前 *</label>
+                    <input type="text" id="bookshelf-name" placeholder="本棚の名前を入力してください" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookshelf-emoji">絵文字</label>
+                    <input type="text" id="bookshelf-emoji" placeholder="📚" value="📚" maxlength="2">
+                </div>
+                <div class="form-group">
+                    <label for="bookshelf-description">説明</label>
+                    <textarea id="bookshelf-description" placeholder="本棚の説明を入力してください（任意）" rows="3"></textarea>
+                </div>
+                <div class="form-actions" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button id="cancel-bookshelf-form" class="btn btn-secondary">キャンセル</button>
+                    <button id="save-bookshelf-form" class="btn btn-primary">保存</button>
+                </div>
             </div>
         </div>
     </div>

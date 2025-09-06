@@ -124,6 +124,10 @@ class VirtualBookshelf {
         
         this.currentView = this.userData.settings.defaultView || 'covers';
         
+        // Load cover size setting
+        const coverSize = this.userData.settings.coverSize || 'medium';
+        document.getElementById('cover-size').value = coverSize;
+        
         // ハイブリッド表示は使わない、代わりにcoversを使用
         if (this.currentView === 'hybrid') {
             this.currentView = 'covers';
@@ -177,6 +181,11 @@ class VirtualBookshelf {
             this.setBooksPerPage(e.target.value);
         });
 
+        // Cover size
+        document.getElementById('cover-size').addEventListener('change', (e) => {
+            this.setCoverSize(e.target.value);
+        });
+
         // Bookshelf selector
         document.getElementById('bookshelf-selector').addEventListener('change', (e) => {
             this.switchBookshelf(e.target.value);
@@ -192,6 +201,14 @@ class VirtualBookshelf {
         if (manageBookshelves) {
             manageBookshelves.addEventListener('click', () => {
                 this.showBookshelfManager();
+            });
+        }
+
+        // Add bookshelf button
+        const addBookshelfBtn = document.getElementById('add-bookshelf');
+        if (addBookshelfBtn) {
+            addBookshelfBtn.addEventListener('click', () => {
+                this.addBookshelf();
             });
         }
 
@@ -239,6 +256,31 @@ class VirtualBookshelf {
         const addBookModalClose = document.getElementById('add-book-modal-close');
         if (addBookModalClose) {
             addBookModalClose.addEventListener('click', () => this.closeAddBookModal());
+        }
+
+        const bookshelfFormModalClose = document.getElementById('bookshelf-form-modal-close');
+        if (bookshelfFormModalClose) {
+            bookshelfFormModalClose.addEventListener('click', () => this.closeBookshelfForm());
+        }
+
+        const cancelBookshelfForm = document.getElementById('cancel-bookshelf-form');
+        if (cancelBookshelfForm) {
+            cancelBookshelfForm.addEventListener('click', () => this.closeBookshelfForm());
+        }
+
+        const saveBookshelfForm = document.getElementById('save-bookshelf-form');
+        if (saveBookshelfForm) {
+            saveBookshelfForm.addEventListener('click', () => this.saveBookshelfForm());
+        }
+
+        // Enter key to submit bookshelf form
+        const bookshelfNameInput = document.getElementById('bookshelf-name');
+        if (bookshelfNameInput) {
+            bookshelfNameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.saveBookshelfForm();
+                }
+            });
         }
 
         // 手動追加ボタン
@@ -358,6 +400,21 @@ class VirtualBookshelf {
         this.updateDisplay();
         this.saveUserData();
     }
+
+    setCoverSize(size) {
+        // Save the setting
+        if (!this.userData.settings) {
+            this.userData.settings = {};
+        }
+        this.userData.settings.coverSize = size;
+        
+        // Apply CSS class to bookshelf container
+        const bookshelf = document.getElementById('bookshelf');
+        bookshelf.classList.remove('size-small', 'size-medium', 'size-large');
+        bookshelf.classList.add(`size-${size}`);
+        
+        this.saveUserData();
+    }
     
     updateSortDirectionButton() {
         const button = document.getElementById('sort-direction');
@@ -398,7 +455,10 @@ class VirtualBookshelf {
     updateDisplay() {
         const bookshelf = document.getElementById('bookshelf');
         bookshelf.textContent = '';
-        bookshelf.className = `bookshelf view-${this.currentView}`;
+        
+        // Apply view and cover size classes
+        const coverSize = this.userData.settings?.coverSize || 'medium';
+        bookshelf.className = `bookshelf view-${this.currentView} size-${coverSize}`;
         
         this.renderStandardView(bookshelf);
         
@@ -1079,8 +1139,12 @@ class VirtualBookshelf {
 
         container.innerHTML = html;
 
+        // Remove existing event listeners to prevent duplicates
+        const oldContainer = container.cloneNode(true);
+        container.parentNode.replaceChild(oldContainer, container);
+        
         // Add event listeners for edit/delete buttons
-        container.addEventListener('click', (e) => {
+        oldContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('edit-bookshelf')) {
                 this.editBookshelf(e.target.dataset.id);
             } else if (e.target.classList.contains('delete-bookshelf')) {
@@ -1089,48 +1153,87 @@ class VirtualBookshelf {
         });
 
         // Add drag and drop functionality for bookshelf reordering
-        this.setupBookshelfDragAndDrop(container);
+        this.setupBookshelfDragAndDrop(oldContainer);
     }
 
     addBookshelf() {
-        const name = prompt('📚 新しい本棚の名前を入力してください:');
-        if (!name || name.trim() === '') return;
+        this.showBookshelfForm();
+    }
 
-        const emoji = prompt('📚 本棚の絵文字を入力してください (optional):', '📚');
-        const description = prompt('📝 本棚の説明を入力してください (optional):', '');
+    showBookshelfForm(bookshelfToEdit = null) {
+        const modal = document.getElementById('bookshelf-form-modal');
+        const title = document.getElementById('bookshelf-form-title');
+        const nameInput = document.getElementById('bookshelf-name');
+        const emojiInput = document.getElementById('bookshelf-emoji');
+        const descriptionInput = document.getElementById('bookshelf-description');
+        
+        // Set form title and populate fields for editing
+        if (bookshelfToEdit) {
+            title.textContent = '📚 本棚を編集';
+            nameInput.value = bookshelfToEdit.name;
+            emojiInput.value = bookshelfToEdit.emoji || '📚';
+            descriptionInput.value = bookshelfToEdit.description || '';
+        } else {
+            title.textContent = '📚 新しい本棚';
+            nameInput.value = '';
+            emojiInput.value = '📚';
+            descriptionInput.value = '';
+        }
+        
+        // Store current editing bookshelf
+        this.currentEditingBookshelf = bookshelfToEdit;
+        
+        modal.classList.add('show');
+        nameInput.focus();
+    }
 
-        const newBookshelf = {
-            id: `bookshelf_${Date.now()}`,
-            name: name.trim(),
-            emoji: emoji || '📚',
-            description: description || '',
-            books: [],
-            createdAt: new Date().toISOString()
-        };
+    closeBookshelfForm() {
+        const modal = document.getElementById('bookshelf-form-modal');
+        modal.classList.remove('show');
+        this.currentEditingBookshelf = null;
+    }
 
-        this.userData.bookshelves.push(newBookshelf);
+    saveBookshelfForm() {
+        const nameInput = document.getElementById('bookshelf-name');
+        const emojiInput = document.getElementById('bookshelf-emoji');
+        const descriptionInput = document.getElementById('bookshelf-description');
+        
+        const name = nameInput.value.trim();
+        if (!name) {
+            alert('本棚の名前を入力してください');
+            nameInput.focus();
+            return;
+        }
+
+        if (this.currentEditingBookshelf) {
+            // Edit existing bookshelf
+            this.currentEditingBookshelf.name = name;
+            this.currentEditingBookshelf.emoji = emojiInput.value.trim() || '📚';
+            this.currentEditingBookshelf.description = descriptionInput.value.trim();
+        } else {
+            // Create new bookshelf
+            const newBookshelf = {
+                id: `bookshelf_${Date.now()}`,
+                name: name,
+                emoji: emojiInput.value.trim() || '📚',
+                description: descriptionInput.value.trim(),
+                books: [],
+                createdAt: new Date().toISOString()
+            };
+            this.userData.bookshelves.push(newBookshelf);
+        }
+
         this.saveUserData();
         this.updateBookshelfSelector();
         this.renderBookshelfList();
+        this.closeBookshelfForm();
     }
 
     editBookshelf(bookshelfId) {
         const bookshelf = this.userData.bookshelves.find(b => b.id === bookshelfId);
         if (!bookshelf) return;
-
-        const newName = prompt('📚 本棚の名前を編集:', bookshelf.name);
-        if (newName === null) return; // User cancelled
-
-        const newEmoji = prompt('📚 本棚の絵文字を編集:', bookshelf.emoji);
-        const newDescription = prompt('📝 本棚の説明を編集:', bookshelf.description);
-
-        bookshelf.name = newName.trim() || bookshelf.name;
-        bookshelf.emoji = newEmoji || bookshelf.emoji;
-        bookshelf.description = newDescription || bookshelf.description;
-
-        this.saveUserData();
-        this.updateBookshelfSelector();
-        this.renderBookshelfList();
+        
+        this.showBookshelfForm(bookshelf);
     }
 
     deleteBookshelf(bookshelfId) {
@@ -2075,10 +2178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.bookshelf = new VirtualBookshelf();
     window.lazyLoader = new LazyLoader();
     
-    // Set up bookshelf management event listeners
-    document.getElementById('add-bookshelf').addEventListener('click', () => {
-        window.bookshelf.addBookshelf();
-    });
+    // Bookshelf management event listeners are handled in setupEventListeners
     
     // Set up mutation observer to handle dynamically added images
     const mutationObserver = new MutationObserver(() => {
