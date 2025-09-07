@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wikipedia Service Test - ゲーム情報取得テスト</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        .loading {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .game-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .info-item {
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            color: #333;
+        }
+        .attribution {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .sample-games {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .sample-game {
+            padding: 5px 10px;
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .sample-game:hover {
+            background-color: #cce7ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Wikipedia Service Test</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            ゲーム情報をWikipediaから取得するサービスのテストページです
+        </p>
+
+        <div class="test-section">
+            <h2>🔍 ゲーム検索テスト</h2>
+            <p>ゲームタイトルを入力してWikipediaから情報を取得してみましょう</p>
+            
+            <div class="sample-games">
+                <span class="sample-game" onclick="setGameTitle('The Legend of Zelda Breath of the Wild')">ゼルダの伝説 ブレス オブ ザ ワイルド</span>
+                <span class="sample-game" onclick="setGameTitle('Super Mario Odyssey')">スーパーマリオ オデッセイ</span>
+                <span class="sample-game" onclick="setGameTitle('Minecraft')">Minecraft</span>
+                <span class="sample-game" onclick="setGameTitle('Final Fantasy VII')">ファイナルファンタジーVII</span>
+                <span class="sample-game" onclick="setGameTitle('Pokemon Red and Blue')">ポケットモンスター 赤・緑</span>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="game-title" placeholder="ゲームタイトルを入力してください（例: The Legend of Zelda Breath of the Wild）" />
+                <button onclick="testGameSearch()" id="search-btn">検索</button>
+            </div>
+            
+            <div id="search-results" class="results" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 API機能テスト</h2>
+            <p>Wikipedia APIの各機能を個別にテストします</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <button onclick="testSearchFunction()">ページ検索テスト</button>
+                <button onclick="testContentFunction()">コンテンツ取得テスト</button>
+                <button onclick="testWikitextFunction()">Wikitext取得テスト</button>
+                <button onclick="testInfoBoxFunction()">InfoBox解析テスト</button>
+            </div>
+            
+            <div id="api-results" class="results" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="js/wikipedia-service.js"></script>
+    <script>
+        const wikipediaService = new WikipediaService();
+
+        function setGameTitle(title) {
+            document.getElementById('game-title').value = title;
+        }
+
+        async function testGameSearch() {
+            const gameTitle = document.getElementById('game-title').value.trim();
+            const resultsDiv = document.getElementById('search-results');
+            const searchBtn = document.getElementById('search-btn');
+            
+            if (!gameTitle) {
+                alert('ゲームタイトルを入力してください');
+                return;
+            }
+            
+            resultsDiv.style.display = 'block';
+            resultsDiv.className = 'results loading';
+            resultsDiv.innerHTML = '<p>🔍 Wikipediaから情報を取得中...</p>';
+            searchBtn.disabled = true;
+            
+            try {
+                const gameData = await wikipediaService.extractGameMetadata(gameTitle);
+                
+                if (gameData) {
+                    resultsDiv.className = 'results success';
+                    resultsDiv.innerHTML = `
+                        <h3>✅ 取得成功: ${gameData.title}</h3>
+                        <div class="game-info">
+                            <div class="info-item">
+                                <div class="info-label">タイトル</div>
+                                <div class="info-value">${gameData.title || '情報なし'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">開発者</div>
+                                <div class="info-value">${gameData.developer || '情報なし'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">発売元</div>
+                                <div class="info-value">${gameData.publisher || '情報なし'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">発売日</div>
+                                <div class="info-value">${gameData.releaseDate || '情報なし'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">プラットフォーム</div>
+                                <div class="info-value">${Array.isArray(gameData.platforms) ? gameData.platforms.join(', ') : '情報なし'}</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">ジャンル</div>
+                                <div class="info-value">${Array.isArray(gameData.genre) ? gameData.genre.join(', ') : '情報なし'}</div>
+                            </div>
+                        </div>
+                        ${gameData.description ? `<div class="info-item" style="grid-column: 1 / -1; margin-top: 15px;"><div class="info-label">説明</div><div class="info-value">${gameData.description.substring(0, 300)}${gameData.description.length > 300 ? '...' : ''}</div></div>` : ''}
+                        <div class="attribution">
+                            <strong>📄 データソース:</strong> <a href="${gameData.attribution.url}" target="_blank">${gameData.attribution.text}</a><br>
+                            <strong>📜 ライセンス:</strong> <a href="${gameData.attribution.licenseUrl}" target="_blank">${gameData.attribution.license}</a>
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.className = 'results error';
+                    resultsDiv.innerHTML = '<p>❌ 該当するゲーム情報が見つかりませんでした</p>';
+                }
+            } catch (error) {
+                resultsDiv.className = 'results error';
+                resultsDiv.innerHTML = `<p>❌ エラーが発生しました: ${error.message}</p>`;
+                console.error('Wikipedia search error:', error);
+            } finally {
+                searchBtn.disabled = false;
+            }
+        }
+
+        async function testSearchFunction() {
+            const resultsDiv = document.getElementById('api-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.className = 'results loading';
+            resultsDiv.innerHTML = '<p>🔍 ページ検索機能をテスト中...</p>';
+            
+            try {
+                const searchResults = await wikipediaService.searchGamePages('Minecraft');
+                resultsDiv.className = 'results success';
+                resultsDiv.innerHTML = `
+                    <h3>✅ 検索結果 (${searchResults.length}件)</h3>
+                    <ul>
+                        ${searchResults.slice(0, 5).map(result => 
+                            `<li><strong>${result.title}</strong><br><small>${result.snippet}</small></li>`
+                        ).join('')}
+                    </ul>
+                `;
+            } catch (error) {
+                resultsDiv.className = 'results error';
+                resultsDiv.innerHTML = `<p>❌ エラー: ${error.message}</p>`;
+            }
+        }
+
+        async function testContentFunction() {
+            const resultsDiv = document.getElementById('api-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.className = 'results loading';
+            resultsDiv.innerHTML = '<p>📄 コンテンツ取得機能をテスト中...</p>';
+            
+            try {
+                const content = await wikipediaService.getPageContent('Minecraft');
+                resultsDiv.className = 'results success';
+                resultsDiv.innerHTML = `
+                    <h3>✅ コンテンツ取得成功</h3>
+                    <p><strong>タイトル:</strong> ${content.title}</p>
+                    <p><strong>URL:</strong> <a href="${content.url}" target="_blank">${content.url}</a></p>
+                    <p><strong>説明:</strong> ${content.extract ? content.extract.substring(0, 200) + '...' : '情報なし'}</p>
+                `;
+            } catch (error) {
+                resultsDiv.className = 'results error';
+                resultsDiv.innerHTML = `<p>❌ エラー: ${error.message}</p>`;
+            }
+        }
+
+        async function testWikitextFunction() {
+            const resultsDiv = document.getElementById('api-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.className = 'results loading';
+            resultsDiv.innerHTML = '<p>📝 Wikitext取得機能をテスト中...</p>';
+            
+            try {
+                const wikitext = await wikipediaService.getPageWikitext('Minecraft');
+                resultsDiv.className = 'results success';
+                resultsDiv.innerHTML = `
+                    <h3>✅ Wikitext取得成功</h3>
+                    <p><strong>文字数:</strong> ${wikitext.length} 文字</p>
+                    <p><strong>先頭部分:</strong></p>
+                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto; font-size: 12px;">${wikitext.substring(0, 500)}...</pre>
+                `;
+            } catch (error) {
+                resultsDiv.className = 'results error';
+                resultsDiv.innerHTML = `<p>❌ エラー: ${error.message}</p>`;
+            }
+        }
+
+        async function testInfoBoxFunction() {
+            const resultsDiv = document.getElementById('api-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.className = 'results loading';
+            resultsDiv.innerHTML = '<p>📊 InfoBox解析機能をテスト中...</p>';
+            
+            try {
+                const wikitext = await wikipediaService.getPageWikitext('Minecraft');
+                const infoboxData = await wikipediaService.parseInfoBox(wikitext);
+                resultsDiv.className = 'results success';
+                resultsDiv.innerHTML = `
+                    <h3>✅ InfoBox解析成功</h3>
+                    <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto; font-size: 12px;">${JSON.stringify(infoboxData, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultsDiv.className = 'results error';
+                resultsDiv.innerHTML = `<p>❌ エラー: ${error.message}</p>`;
+            }
+        }
+
+        // Enter key support
+        document.getElementById('game-title').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                testGameSearch();
+            }
+        });
+    </script>
+</body>
+</html>

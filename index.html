@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Bookshelf - 読書ライブラリ</title>
-    <meta name="description" content="個人読書コレクション - お気に入りの本を美しく展示">
+    <title>Game Shelf - ゲームライブラリ</title>
+    <meta name="description" content="個人ゲームコレクション - お気に入りのゲームを美しく展示">
     
     <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="Virtual Bookshelf - 読書ライブラリ">
-    <meta property="og:description" content="お気に入りコレクション">
+    <meta property="og:title" content="Game Shelf - ゲームライブラリ">
+    <meta property="og:description" content="お気に入りゲームコレクション">
     <meta property="og:type" content="website">
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
-    <link rel="stylesheet" href="css/bookshelf.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    <link rel="stylesheet" href="css/gameshelf.css">
 
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <h1 class="header-title">📚 Virtual Bookshelf</h1>
-            <p class="header-subtitle">読書ライブラリ</p>
+            <h1 class="header-title">🎮 Game Shelf</h1>
+            <p class="header-subtitle">ゲームライブラリ</p>
             
             <div class="header-controls">
-                <div class="bookshelf-controls">
-                    <select id="bookshelf-selector" class="bookshelf-selector">
-                        <option value="all">📚 全ての本</option>
+                <div class="collection-controls">
+                    <select id="collection-selector" class="collection-selector">
+                        <option value="all">🎮 全てのゲーム</option>
                     </select>
-                    <button id="manage-bookshelves" class="btn btn-outline">📝 本棚管理</button>
+                    <button id="manage-collections" class="btn btn-outline">📝 コレクション管理</button>
                 </div>
                 
                 <div class="view-toggle">
-                    <button id="view-covers" class="btn btn-primary active">表紙表示</button>
+                    <button id="view-covers" class="btn btn-primary active">カバー表示</button>
                     <button id="view-list" class="btn btn-secondary">リスト表示</button>
                 </div>
                 
                 <div class="search-box">
-                    <input type="text" id="search-input" placeholder="タイトルや著者で検索...">
+                    <input type="text" id="search-input" placeholder="タイトルや開発者で検索...">
                 </div>
             </div>
         </div>
@@ -46,6 +46,61 @@
             <aside class="sidebar">
                 <div class="filter-section">
                     <h3>フィルター</h3>
+                    
+                    <div class="filter-group">
+                        <label>プラットフォーム</label>
+                        <div class="platform-filter-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="platform-pc" value="PC" checked>
+                                🖥️ PC
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="platform-playstation" value="PlayStation" checked>
+                                🎮 PlayStation
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="platform-xbox" value="Xbox" checked>
+                                🎮 Xbox
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="platform-nintendo" value="Nintendo" checked>
+                                🎮 Nintendo
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="platform-steam" value="Steam" checked>
+                                🚂 Steam
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>完了状況</label>
+                        <div class="completion-filter-checkboxes">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="completion-not-started" value="not_started" checked>
+                                ⚪ 未プレイ
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="completion-in-progress" value="in_progress" checked>
+                                🟡 プレイ中
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="completion-completed" value="completed" checked>
+                                🟢 完了
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="completion-abandoned" value="abandoned" checked>
+                                🔴 中断
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>ジャンル</label>
+                        <div class="genre-filter-checkboxes" id="genre-filter-checkboxes">
+                            <!-- Genre filters will be dynamically populated -->
+                        </div>
+                    </div>
                     
                     <div class="filter-group">
                         <label>星評価フィルター</label>
@@ -81,21 +136,24 @@
                         <label>並び順</label>
                         <select id="sort-order">
                             <option value="custom" selected>カスタム順</option>
-                            <option value="acquiredTime">購入日</option>
+                            <option value="acquiredTime">追加日</option>
                             <option value="title">タイトル</option>
-                            <option value="authors">著者</option>
-
+                            <option value="developer">開発者</option>
+                            <option value="publisher">発売元</option>
+                            <option value="releaseDate">発売日</option>
+                            <option value="rating">評価</option>
+                            <option value="completionStatus">完了状況</option>
                         </select>
                         <button id="sort-direction" class="btn btn-small">↓ 新しい順</button>
                     </div>
                     
                     <div class="filter-group">
                         <label>表示数</label>
-                        <select id="books-per-page">
-                            <option value="25">25冊</option>
-                            <option value="50" selected>50冊</option>
-                            <option value="100">100冊</option>
-                            <option value="200">200冊</option>
+                        <select id="games-per-page">
+                            <option value="25">25ゲーム</option>
+                            <option value="50" selected>50ゲーム</option>
+                            <option value="100">100ゲーム</option>
+                            <option value="200">200ゲーム</option>
                             <option value="all">全て表示</option>
                         </select>
                     </div>
@@ -114,21 +172,23 @@
                     <h3>統計情報</h3>
                     <div class="stats">
                         <div class="stat-item">
-                            <span class="stat-value" id="total-books">-</span>
-                            <span class="stat-label">総蔵書数</span>
+                            <span class="stat-value" id="total-games">-</span>
+                            <span class="stat-label">総ゲーム数</span>
                         </div>
-
+                        <div class="stat-item">
+                            <span class="stat-value" id="total-platforms">-</span>
+                            <span class="stat-label">プラットフォーム数</span>
+                        </div>
                     </div>
                     
-                    
-                    
                     <div class="library-management">
-                        <h3>蔵書管理</h3>
+                        <h3>ゲーム管理</h3>
                         <div class="management-buttons">
-                            <button id="import-kindle" class="btn btn-secondary">📥 Kindleインポート</button>
-                            <button id="add-book-manually" class="btn btn-secondary">➕ 手動追加</button>
+                            <button id="import-steam" class="btn btn-secondary">📥 Steamインポート</button>
+                            <button id="add-game-manually" class="btn btn-secondary">🔍 ゲーム検索・追加</button>
+                            <button id="wikipedia-test" class="btn btn-secondary">🔍 Wikipedia テスト</button>
                             <button id="export-unified" class="btn btn-secondary">💾 データエクスポート</button>
-                            <button id="clear-library" class="btn btn-danger">🗑️ 蔵書をクリア</button>
+                            <button id="clear-library" class="btn btn-danger">🗑️ ライブラリをクリア</button>
                         </div>
                     </div>
                 </div>
@@ -136,22 +196,22 @@
 
             <section class="bookshelf-container">
                 <div class="loading" id="loading">
-                    📚 本棚を準備中...
+                    🎮 ゲームライブラリを準備中...
                 </div>
                 
-                <!-- Bookshelf Overview Section -->
+                <!-- Game Shelf Overview Section -->
                 <div class="bookshelves-overview" id="bookshelves-overview" style="display: none;">
-                    <h2 class="section-title">📚 本棚一覧</h2>
+                    <h2 class="section-title">🎮 ゲーム棚一覧</h2>
                     <div class="bookshelf-overview-controls">
                         <button id="toggle-bookshelf-display" class="btn btn-secondary">🖼️ 画像表示切替</button>
                     </div>
                     <div class="bookshelves-grid" id="bookshelves-grid">
-                        <!-- Bookshelves overview will be loaded here -->
+                        <!-- Game shelves overview will be loaded here -->
                     </div>
                 </div>
                 
                 <div class="bookshelf" id="bookshelf">
-                    <!-- Books will be dynamically loaded here -->
+                    <!-- Games will be dynamically loaded here -->
                 </div>
                 
                 <div class="pagination" id="pagination">
@@ -163,100 +223,118 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2025 からあげ | Powered by Kindle & GitHub Pages</p>
+            <p>© 2025 マイボー | Powered by Steam & Wikipedia</p>
             <p class="affiliate-disclosure">
-                ⚠️ <strong>アフィリエイト開示:</strong> このサイトはAmazon.co.jpアソシエイトプログラムに参加しており、
-                適格販売により収入を得る場合があります。
+                ⚠️ <strong>データソース:</strong> このサイトはSteam API、Wikipedia、Wikidataから
+                ゲーム情報を取得しています。
             </p>
             <p>
-                <a href="https://github.com/karaage0703/virtual-bookshelf-template" target="_blank" rel="noopener">
+                <a href="https://github.com/mybo/game-shelf-template" target="_blank" rel="noopener">
                     GitHub Repository
                 </a>
             </p>
         </div>
     </footer>
 
-    <!-- Book detail modal -->
-    <div class="modal" id="book-modal">
+    <!-- Game detail modal -->
+    <div class="modal" id="game-modal">
         <div class="modal-content">
             <button class="modal-close" id="modal-close">×</button>
             <div class="modal-body" id="modal-body">
-                <!-- Book details will be loaded here -->
+                <!-- Game details will be loaded here -->
             </div>
         </div>
     </div>
 
-    <!-- Bookshelf Management Modal -->
-    <div id="bookshelf-modal" class="modal">
+    <!-- Collection Management Modal -->
+    <div id="collection-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" id="bookshelf-modal-close">×</button>
+            <button class="modal-close" id="collection-modal-close">×</button>
             <div class="modal-header">
-                <h2>📚 本棚管理</h2>
-                <button id="add-bookshelf" class="btn btn-primary">+ 新しい本棚</button>
+                <h2>📚 コレクション管理</h2>
+                <button id="add-collection" class="btn btn-primary">+ 新しいコレクション</button>
             </div>
-            <div id="bookshelves-list">
-                <!-- Bookshelves will be inserted here -->
+            <div id="collections-list">
+                <!-- Collections will be inserted here -->
             </div>
         </div>
     </div>
 
-    <!-- Bookshelf Form Modal -->
-    <div id="bookshelf-form-modal" class="modal">
+    <!-- Collection Form Modal -->
+    <div id="collection-form-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" id="bookshelf-form-modal-close">×</button>
+            <button class="modal-close" id="collection-form-modal-close">×</button>
             <div class="modal-header">
-                <h2 id="bookshelf-form-title">📚 新しい本棚</h2>
+                <h2 id="collection-form-title">📚 新しいコレクション</h2>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="bookshelf-name">本棚の名前 *</label>
-                    <input type="text" id="bookshelf-name" placeholder="本棚の名前を入力してください" required>
+                    <label for="collection-name">コレクション名 *</label>
+                    <input type="text" id="collection-name" placeholder="コレクション名を入力してください" required>
                 </div>
                 <div class="form-group">
-                    <label for="bookshelf-emoji">絵文字</label>
-                    <input type="text" id="bookshelf-emoji" placeholder="📚" value="📚" maxlength="2">
+                    <label for="collection-emoji">絵文字</label>
+                    <input type="text" id="collection-emoji" placeholder="📁" value="📁" maxlength="2">
                 </div>
                 <div class="form-group">
-                    <label for="bookshelf-description">説明</label>
-                    <textarea id="bookshelf-description" placeholder="本棚の説明を入力してください（任意）" rows="3"></textarea>
+                    <label for="collection-description">説明</label>
+                    <textarea id="collection-description" placeholder="コレクションの説明を入力してください（任意）" rows="3"></textarea>
                 </div>
                 <div class="form-actions" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
-                    <button id="cancel-bookshelf-form" class="btn btn-secondary">キャンセル</button>
-                    <button id="save-bookshelf-form" class="btn btn-primary">保存</button>
+                    <button id="cancel-collection-form" class="btn btn-secondary">キャンセル</button>
+                    <button id="save-collection-form" class="btn btn-primary">保存</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Book Management Modals -->
-    <!-- Kindle Import Modal -->
+    <!-- Collection Overview Modal -->
+    <div id="collection-overview-modal" class="modal">
+        <div class="modal-content large">
+            <button class="modal-close" id="collection-overview-modal-close">×</button>
+            <div class="modal-header">
+                <h2 id="collection-overview-title">📚 コレクション詳細</h2>
+                <div class="collection-actions">
+                    <button id="edit-collection" class="btn btn-secondary">✏️ 編集</button>
+                    <button id="delete-collection" class="btn btn-danger">🗑️ 削除</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="collection-overview-content">
+                    <!-- Collection overview content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Management Modals -->
+    <!-- Steam Import Modal -->
     <div id="import-modal" class="modal">
         <div class="modal-content">
             <button class="modal-close" id="import-modal-close">×</button>
             <div class="modal-header">
-                <h2>📥 Kindleデータインポート</h2>
+                <h2>📥 Steamデータインポート</h2>
             </div>
             <div class="modal-body">
                 <div class="import-options">
                     <div class="import-option">
                         <h3>ファイルからインポート</h3>
-                        <input type="file" id="kindle-file-input" accept=".json" />
+                        <input type="file" id="steam-file-input" accept=".json" />
                         <button id="import-from-file" class="btn btn-primary">ファイルをインポート</button>
                     </div>
-
                 </div>
-                <div id="book-selection" class="book-selection" style="display: none;">
-                    <h3>📚 インポートする本を選択</h3>
+                <div id="game-selection" class="game-selection" style="display: none;">
+                    <h3>🎮 インポートするゲームを選択</h3>
                     <div class="selection-controls">
-                        <button id="select-all-books" class="btn btn-small">全て選択</button>
-                        <button id="deselect-all-books" class="btn btn-small">全て解除</button>
-                        <span class="selected-count">選択: <span id="selected-count">0</span>冊</span>
+                        <button id="select-all-games" class="btn btn-small">全て選択</button>
+                        <button id="deselect-all-games" class="btn btn-small">全て解除</button>
+                        <span class="selected-count">選択: <span id="selected-count">0</span>本</span>
                     </div>
-                    <div id="book-list" class="book-selection-list">
-                        <!-- Book selection checkboxes will be populated here -->
+                    <div id="game-list" class="game-selection-list">
+                        <!-- Game selection checkboxes will be populated here -->
                     </div>
                     <div class="import-actions">
-                        <button id="import-selected-books" class="btn btn-primary" disabled>選択した本をインポート</button>
+                        <button id="import-selected-games" class="btn btn-primary" disabled>選択したゲームをインポート</button>
                         <button id="cancel-import" class="btn btn-secondary">キャンセル</button>
                     </div>
                 </div>
@@ -267,42 +345,156 @@
         </div>
     </div>
 
-    <!-- Manual Book Addition Modal -->
-    <div id="add-book-modal" class="modal">
+    <!-- Manual Game Addition Modal -->
+    <div id="add-game-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" id="add-book-modal-close">×</button>
+            <button class="modal-close" id="add-game-modal-close">×</button>
             <div class="modal-header">
-                <h2>➕ 手動で本を追加</h2>
+                <h2>➕ 手動でゲームを追加</h2>
             </div>
             <div class="modal-body">
-                <div class="add-book-options">
+                <div class="add-game-options">
                     <div class="add-option">
-                        <h3>本の情報を入力</h3>
+                        <h3>ゲームの情報を入力</h3>
                         <div class="form-group">
-                            <label for="manual-asin">ASIN</label>
-                            <input type="text" id="manual-asin" placeholder="B012345678" maxlength="10" />
+                            <label for="manual-steam-id">Steam ID</label>
+                            <input type="text" id="manual-steam-id" placeholder="123456" />
                         </div>
                         <div class="form-group">
                             <label for="manual-title">タイトル</label>
-                            <input type="text" id="manual-title" placeholder="書籍タイトル" />
+                            <input type="text" id="manual-title" placeholder="ゲームタイトル" />
                         </div>
                         <div class="form-group">
-                            <label for="manual-authors">著者</label>
-                            <input type="text" id="manual-authors" placeholder="著者名" />
+                            <label for="manual-developer">開発者</label>
+                            <input type="text" id="manual-developer" placeholder="開発者名" />
                         </div>
-
+                        <div class="form-group">
+                            <label for="manual-platform">プラットフォーム</label>
+                            <input type="text" id="manual-platform" placeholder="PC, PlayStation, Nintendo Switch" />
+                        </div>
                         <button id="add-manually" class="btn btn-primary">手動追加</button>
                     </div>
                 </div>
-                <div id="add-book-results" class="add-results" style="display: none;">
+                <div id="add-game-results" class="add-results" style="display: none;">
                     <!-- Addition results will be shown here -->
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="js/book-manager.js"></script>
-    <script src="js/highlights.js"></script>
-    <script src="js/bookshelf.js"></script>
+    <!-- Wikipedia Test Modal -->
+    <div id="wikipedia-test-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="wikipedia-test-modal-close">×</button>
+            <div class="modal-header">
+                <h2>🔍 Wikipedia ゲーム情報テスト</h2>
+            </div>
+            <div class="modal-body">
+                <div class="wikipedia-test-content">
+                    <p>ゲームタイトルを入力してWikipediaから情報を取得してみましょう</p>
+                    <div class="form-group">
+                        <label for="wikipedia-game-title">ゲームタイトル</label>
+                        <input type="text" id="wikipedia-game-title" placeholder="例: The Legend of Zelda Breath of the Wild" />
+                    </div>
+                    <button id="test-wikipedia" class="btn btn-primary">Wikipedia検索</button>
+                    <div id="wikipedia-results" style="margin-top: 20px; display: none;">
+                        <!-- Wikipedia test results will be shown here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save indicator -->
+    <div class="save-indicator" id="save-indicator">💾 保存しました</div>
+
+    <script src="js/wikipedia-service.js"></script>
+    <script src="js/wikidata-service.js"></script>
+    <script src="js/game-manager.js"></script>
+    <script src="js/collection-manager.js"></script>
+    <script src="js/collection-ui.js"></script>
+    <script src="js/search-manager.js"></script>
+    <script src="js/search-ui.js"></script>
+    <script src="js/sample-games.js"></script>
+    <script src="js/gameshelf.js"></script>
+    <script>
+        // Wikipedia test functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const wikipediaTestBtn = document.getElementById('wikipedia-test');
+            const wikipediaTestModal = document.getElementById('wikipedia-test-modal');
+            const wikipediaTestModalClose = document.getElementById('wikipedia-test-modal-close');
+            const testWikipediaBtn = document.getElementById('test-wikipedia');
+            
+            if (wikipediaTestBtn) {
+                wikipediaTestBtn.addEventListener('click', function() {
+                    wikipediaTestModal.style.display = 'block';
+                });
+            }
+            
+            if (wikipediaTestModalClose) {
+                wikipediaTestModalClose.addEventListener('click', function() {
+                    wikipediaTestModal.style.display = 'none';
+                });
+            }
+            
+            if (testWikipediaBtn) {
+                testWikipediaBtn.addEventListener('click', async function() {
+                    const gameTitle = document.getElementById('wikipedia-game-title').value.trim();
+                    const resultsDiv = document.getElementById('wikipedia-results');
+                    
+                    if (!gameTitle) {
+                        alert('ゲームタイトルを入力してください');
+                        return;
+                    }
+                    
+                    resultsDiv.style.display = 'block';
+                    resultsDiv.innerHTML = '<p>🔍 Wikipediaから情報を取得中...</p>';
+                    testWikipediaBtn.disabled = true;
+                    
+                    try {
+                        const wikipediaService = new WikipediaService();
+                        const gameData = await wikipediaService.extractGameMetadata(gameTitle);
+                        
+                        if (gameData) {
+                            resultsDiv.innerHTML = `
+                                <h3>✅ 取得成功: ${gameData.title}</h3>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;">
+                                    <div><strong>開発者:</strong> ${gameData.developer || '情報なし'}</div>
+                                    <div><strong>発売元:</strong> ${gameData.publisher || '情報なし'}</div>
+                                    <div><strong>発売日:</strong> ${gameData.releaseDate || '情報なし'}</div>
+                                    <div><strong>プラットフォーム:</strong> ${Array.isArray(gameData.platforms) ? gameData.platforms.join(', ') : '情報なし'}</div>
+                                </div>
+                                <div style="margin-top: 15px;">
+                                    <strong>説明:</strong><br>
+                                    ${gameData.description ? gameData.description.substring(0, 200) + '...' : '情報なし'}
+                                </div>
+                                <div style="margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 5px; font-size: 12px;">
+                                    <strong>データソース:</strong> <a href="${gameData.attribution.url}" target="_blank">${gameData.attribution.text}</a><br>
+                                    <strong>ライセンス:</strong> <a href="${gameData.attribution.licenseUrl}" target="_blank">${gameData.attribution.license}</a>
+                                </div>
+                            `;
+                        } else {
+                            resultsDiv.innerHTML = '<p>❌ 該当するゲーム情報が見つかりませんでした</p>';
+                        }
+                    } catch (error) {
+                        resultsDiv.innerHTML = `<p>❌ エラーが発生しました: ${error.message}</p>`;
+                        console.error('Wikipedia test error:', error);
+                    } finally {
+                        testWikipediaBtn.disabled = false;
+                    }
+                });
+            }
+            
+            // Enter key support for Wikipedia test
+            const wikipediaGameTitleInput = document.getElementById('wikipedia-game-title');
+            if (wikipediaGameTitleInput) {
+                wikipediaGameTitleInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        testWikipediaBtn.click();
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

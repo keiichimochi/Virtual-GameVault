@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Modal Test</title>
+    <link rel="stylesheet" href="css/gameshelf.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Detail Modal Test</h1>
+        <button id="test-modal-btn" class="btn btn-primary">Test Game Modal</button>
+        
+        <!-- Game detail modal -->
+        <div class="modal" id="game-modal">
+            <div class="modal-content">
+                <button class="modal-close" id="modal-close">×</button>
+                <div class="modal-body" id="modal-body">
+                    <!-- Game details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save indicator -->
+    <div class="save-indicator" id="save-indicator">💾 保存しました</div>
+
+    <script src="js/wikipedia-service.js"></script>
+    <script src="js/wikidata-service.js"></script>
+    <script src="js/game-manager.js"></script>
+    <script src="js/search-manager.js"></script>
+    <script src="js/search-ui.js"></script>
+    <script src="js/sample-games.js"></script>
+    <script src="js/gameshelf.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize GameShelf
+            const gameShelf = new GameShelf();
+            
+            // Add a test game if none exist
+            if (gameShelf.games.length === 0) {
+                const testGame = {
+                    id: "test-game",
+                    title: "Test Game",
+                    developer: "Test Developer",
+                    publisher: "Test Publisher",
+                    releaseDate: "2024-01-01",
+                    platforms: ["PC", "PlayStation 5", "Nintendo Switch"],
+                    genre: ["Action", "Adventure"],
+                    description: "This is a test game for demonstrating the game detail modal functionality.",
+                    coverImage: "https://via.placeholder.com/200x300?text=Test+Game",
+                    officialStoreLinks: {
+                        steam: "https://store.steampowered.com",
+                        playstation: "https://store.playstation.com"
+                    },
+                    userMetadata: {
+                        rating: 3,
+                        notes: "This is a test note for the game.",
+                        completionStatus: "in_progress",
+                        tags: ["test", "demo"]
+                    },
+                    attribution: {
+                        url: "https://example.com",
+                        text: "Test Attribution",
+                        licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+                        license: "CC BY-SA 3.0"
+                    }
+                };
+                
+                gameShelf.games.push(testGame);
+            }
+            
+            // Test button
+            document.getElementById('test-modal-btn').addEventListener('click', function() {
+                gameShelf.showGameDetails(gameShelf.games[0].id || gameShelf.games[0].title);
+            });
+            
+            // Modal close handler
+            document.getElementById('modal-close').addEventListener('click', function() {
+                document.getElementById('game-modal').style.display = 'none';
+            });
+            
+            // Click outside to close
+            document.getElementById('game-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</content>

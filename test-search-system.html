@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search System Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .test-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-results {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        .error {
+            color: #dc3545;
+        }
+        .success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Search System Test</h1>
+    
+    <div class="test-section">
+        <h2>SearchManager Test</h2>
+        <input type="text" id="search-query" class="test-input" placeholder="Enter game title (e.g., The Legend of Zelda)" />
+        <button id="test-search" class="test-button">Test Search</button>
+        <div id="search-results" class="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Wikidata Service Test</h2>
+        <input type="text" id="wikidata-query" class="test-input" placeholder="Enter game title for Wikidata search" />
+        <button id="test-wikidata" class="test-button">Test Wikidata</button>
+        <div id="wikidata-results" class="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Wikipedia Service Test</h2>
+        <input type="text" id="wikipedia-query" class="test-input" placeholder="Enter game title for Wikipedia search" />
+        <button id="test-wikipedia" class="test-button">Test Wikipedia</button>
+        <div id="wikipedia-results" class="test-results"></div>
+    </div>
+
+    <script src="js/wikipedia-service.js"></script>
+    <script src="js/wikidata-service.js"></script>
+    <script src="js/game-manager.js"></script>
+    <script src="js/search-manager.js"></script>
+
+    <script>
+        // Initialize services
+        const wikidataService = new WikidataService();
+        const wikipediaService = new WikipediaService();
+        const gameManager = new GameManager();
+        const searchManager = new SearchManager();
+
+        // Initialize GameManager
+        gameManager.initialize();
+
+        // Test SearchManager
+        document.getElementById('test-search').addEventListener('click', async () => {
+            const query = document.getElementById('search-query').value.trim();
+            const resultsDiv = document.getElementById('search-results');
+            
+            if (!query) {
+                resultsDiv.textContent = 'Please enter a search query';
+                return;
+            }
+
+            resultsDiv.innerHTML = '<span class="loading">Searching...</span>';
+            
+            try {
+                const results = await searchManager.searchGame(query);
+                
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = '<span class="error">No results found</span>';
+                } else {
+                    const output = results.map((game, index) => 
+                        `${index + 1}. ${game.title}
+   Source: ${game.searchMetadata?.source || 'unknown'}
+   Confidence: ${(game.searchMetadata?.confidence || 0).toFixed(2)}
+   Developer: ${game.developer || 'N/A'}
+   Platforms: ${(game.platforms || []).join(', ') || 'N/A'}
+   Release: ${game.releaseDate || 'N/A'}`
+                    ).join('\n\n');
+                    
+                    resultsDiv.innerHTML = `<span class="success">Found ${results.length} results:</span>\n\n${output}`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<span class="error">Error: ${error.message}</span>`;
+                console.error('Search error:', error);
+            }
+        });
+
+        // Test Wikidata Service
+        document.getElementById('test-wikidata').addEventListener('click', async () => {
+            const query = document.getElementById('wikidata-query').value.trim();
+            const resultsDiv = document.getElementById('wikidata-results');
+            
+            if (!query) {
+                resultsDiv.textContent = 'Please enter a search query';
+                return;
+            }
+
+            resultsDiv.innerHTML = '<span class="loading">Searching Wikidata...</span>';
+            
+            try {
+                const results = await wikidataService.searchGameByTitle(query);
+                
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = '<span class="error">No Wikidata results found</span>';
+                } else {
+                    const output = results.map((game, index) => 
+                        `${index + 1}. ${game.title}
+   Wikidata ID: ${game.wikidataId || 'N/A'}
+   Developer: ${game.developer || 'N/A'}
+   Platforms: ${(game.platforms || []).join(', ') || 'N/A'}
+   Release: ${game.releaseDate || 'N/A'}`
+                    ).join('\n\n');
+                    
+                    resultsDiv.innerHTML = `<span class="success">Found ${results.length} Wikidata results:</span>\n\n${output}`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<span class="error">Wikidata Error: ${error.message}</span>`;
+                console.error('Wikidata error:', error);
+            }
+        });
+
+        // Test Wikipedia Service
+        document.getElementById('test-wikipedia').addEventListener('click', async () => {
+            const query = document.getElementById('wikipedia-query').value.trim();
+            const resultsDiv = document.getElementById('wikipedia-results');
+            
+            if (!query) {
+                resultsDiv.textContent = 'Please enter a search query';
+                return;
+            }
+
+            resultsDiv.innerHTML = '<span class="loading">Searching Wikipedia...</span>';
+            
+            try {
+                const result = await wikipediaService.extractGameMetadata(query);
+                
+                if (!result) {
+                    resultsDiv.innerHTML = '<span class="error">No Wikipedia results found</span>';
+                } else {
+                    const output = `Title: ${result.title}
+Developer: ${result.developer || 'N/A'}
+Publisher: ${result.publisher || 'N/A'}
+Platforms: ${(result.platforms || []).join(', ') || 'N/A'}
+Release: ${result.releaseDate || 'N/A'}
+Description: ${result.description ? result.description.substring(0, 200) + '...' : 'N/A'}
+Attribution: ${result.attribution?.url || 'N/A'}`;
+                    
+                    resultsDiv.innerHTML = `<span class="success">Wikipedia result found:</span>\n\n${output}`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<span class="error">Wikipedia Error: ${error.message}</span>`;
+                console.error('Wikipedia error:', error);
+            }
+        });
+
+        // Add Enter key support
+        ['search-query', 'wikidata-query', 'wikipedia-query'].forEach(id => {
+            document.getElementById(id).addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const buttonId = id.replace('-query', '');
+                    document.getElementById(`test-${buttonId === 'search' ? 'search' : buttonId}`).click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
